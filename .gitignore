@@ -8,6 +8,7 @@
 /var/
 /vendor/
 /migrations/
+/DataFixtures/
 ###< symfony/framework-bundle ###
 
 ###> phpunit/phpunit ###
