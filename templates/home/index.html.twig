@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+            href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;800;900&display=swap"
+            rel="stylesheet"
+    />
+    <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+    />
+    <link rel="stylesheet" href="{{ asset("assets/css/styles.css") }}" />
+    <title>Tuniscape</title>
+</head>
+<body>
+<header>
+    <div class="logo">
+        <img src="{{ asset('assets/img/logo.png') }}" />
+    </div>
+    <nav class="nav">
+        <ul class="nav__list">
+            <li class="nav__item"><a href="#home" class="nav__link">Home</a></li>
+            <li class="nav__item">
+                <a href="#services" class="nav__link">Services</a>
+            </li>
+            <li class="nav__item">
+                <a href="#about" class="nav__link">About us</a>
+            </li>
+
+                <li class="nav__item">
+                    <a href="#" target="_self"
+                    ><button class="login--btn btn">LOGIN</button></a
+                    >
+                </li>
+        </ul>
+    </nav>
+</header>
+<section class="intro" id="home">
+    <h1
+            class="section__title section__title--intro animate__animated animate__fadeInLeft"
+    >
+        <strong>TUNISIA</strong>
+    </h1>
+    <p class="section__subtitle section__subtitle--intro">
+        A land of white sands and ancient stories
+    </p>
+    <button class="explore--btn btn animate__animated animate__fadeInUp">
+        Explore Now
+    </button>
+</section>
+<!-- Parallax-->
+<section class="parallax--container">
+    <div class="title">
+        <h3>Some beautiful places in</h3>
+        <h1>TUNISIA</h1>
+    </div>
+
+    <div class="parallex parallax-one">
+        <h2>SIDI BOU SAID</h2>
+    </div>
+
+    <div class="block">
+        <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta,
+            cupiditate! Commodi laborum fugit molestias necessitatibus adipisci,
+            quod nobis dolore, facere eveniet placeat, asperiores saepe mollitia
+            ipsum facilis pariatur et nostrum!
+        </p>
+    </div>
+
+    <div class="parallex parallax-two">
+        <h2>TATAOUINE</h2>
+    </div>
+
+    <div class="block">
+        <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Error facere
+            ducimus, molestiae expedita quasi eligendi dicta quidem omnis? Aut cum
+            eveniet deleniti odio recusandae ex aliquam sit quod, ut nemo.
+        </p>
+    </div>
+
+    <div class="parallex parallax-three">
+        <h2>AMPHITHEATER OF EL JEM</h2>
+    </div>
+
+    <div class="block">
+        <p>
+            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Magnam
+            quibusdam fugit soluta quaerat laboriosam architecto eligendi itaque,
+            aliquid atque ea iusto, eum, dicta adipisci! Aut ducimus minima
+            dolorum earum enim!
+        </p>
+    </div>
+</section>
+
+<!-- Our Services-->
+<section class="our-services" id="services">
+    <h2 class="section--title">The Service You Deserve</h2>
+    <p class="section__subtitle--service">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit.
+    </p>
+    <div class="services">
+        <div class="service__item service__description">
+            <i class="fa-solid fa-landmark"></i>
+            <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor
+                tempore libero, labore ut.
+            </p>
+        </div>
+
+        <a href="#" class="service__item">
+            <img src={{ asset('assets/img/service4.jpeg')}} alt="" class="service__img" />
+        </a>
+
+        <div class="service__item service__description">
+            <i class="fa-solid fa-utensils"></i>
+            <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor
+                tempore libero, labore ut.
+            </p>
+        </div>
+
+        <a href="#" class="service__item">
+            <img src={{ asset('assets/img/service1.jpg') }} alt="" class="service__img" />
+        </a>
+
+        <div class="service__item service__description">
+            <i class="fa-solid fa-star"></i>
+            <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor
+                tempore libero, labore ut.
+            </p>
+        </div>
+
+        <a href="#" class="service__item">
+            <img src="{{ asset('assets/img/service3.jpg') }}" alt="" class="service__img" />
+        </a>
+    </div>
+</section>
+
+<!-- weather -->
+<marquee behavior="scroll" direction="left" scrollamount="10">
+    Live Weather Update: Sunny skies and 70°F in Los Angeles, CA | Partly
+    cloudy and 60°F in New York, NY | Rainy and 55°F in Seattle, WA | Clear
+    skies and 80°F in Miami, FL
+</marquee>
+
+<footer class="footer">
+    <!--Content before waves-->
+    <div class="inner-footer">
+        <h1>Start Your Journey!</h1>
+        <svg
+                class="tunisia--flag"
+                width="300"
+                height="200"
+                viewBox="-60 -40 120 80"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="rgba(255,255,255,0)"
+        >
+            <path d="M-60-40H60v80H-60z" />
+            <circle fill="#e70013" r="30" />
+            <circle fill="#fff" r="20" />
+            <circle fill="#e70013" r="15" />
+            <circle fill="#fff" cx="4" r="12" />
+            <path
+                    d="M-5 0l16.281-5.29L1.22 8.56V-8.56L11.28 5.29z"
+                    fill="#e70013"
+            />
+        </svg>
+    </div>
+
+    <!--Waves Container-->
+    <div>
+        <svg
+                class="waves"
+                xmlns="http://www.w3.org/2000/svg"
+                xmlns:xlink="http://www.w3.org/1999/xlink"
+                viewBox="0 24 150 28"
+                preserveAspectRatio="none"
+                shape-rendering="auto"
+        >
+            <defs>
+                <path
+                        id="gentle-wave"
+                        d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z"
+                />
+            </defs>
+            <g class="wave--animation">
+                <use
+                        xlink:href="#gentle-wave"
+                        x="48"
+                        y="0"
+                        fill="rgba(255,255,255,0.7"
+                />
+                <use
+                        xlink:href="#gentle-wave"
+                        x="48"
+                        y="3"
+                        fill="rgba(255,255,255,0.5)"
+                />
+                <use
+                        xlink:href="#gentle-wave"
+                        x="48"
+                        y="5"
+                        fill="rgba(255,255,255,0.3)"
+                />
+                <use xlink:href="#gentle-wave" x="48" y="7" fill="#fff" />
+            </g>
+        </svg>
+    </div>
+    <div class="footer--content">
+        <p>Made By &nbsp;</p>
+        <p>
+            <span>Amine Affi</span>
+            <span class="separator"></span>
+            <span>Elyes Belgouthi</span>
+            <span class="separator"></span>
+            <span>Adem Laadhari</span>
+            <span class="separator"></span>
+            <span>Omar Maalej</span>
+            <span class="separator"></span>
+            <span>Ahmed Karray</span>
+        </p>
+    </div>
+</footer>
+<a href="#home" class="comeback--btn--anchor"
+><button class="explore--btn comeback--btn">
+        <i class="fa-solid fa-arrow-up"></i></button
+    ></a>
+<!--Content ends-->
+<script
+        src="https://kit.fontawesome.com/f0a0962bc1.js"
+        crossorigin="anonymous"
+></script>
+<script src="./assets/js/script.js"></script>
+</body>
+</html>
