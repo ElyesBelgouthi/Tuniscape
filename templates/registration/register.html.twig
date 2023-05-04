@@ -1,21 +1,93 @@
-{% extends 'base.html.twig' %}
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+            href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;800;900&display=swap"
+            rel="stylesheet"
+    />
+    <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+    />
+    <link rel="stylesheet" href="{{ asset("assets/css/styles2.css") }}" />
+    <title>Tuniscape</title>
 
-{% block title %}Register{% endblock %}
+<body style="  background-image: url({{ asset("assets/img/bgimg.jpg") }})">
+<section class="login--page">
+    <div class="login--container">
+        <div class="login--img">
+            <img src="{{ asset("assets/img/signup1.jpg") }}" alt="" />
+        </div>
+        <div class="form-container">
+            <p class="title">Sign up</p>
+            <div class="login-box">
+                {{ form_start(registrationForm, {'attr': {'id': 'registration-form'}}) }}                    <div class="user-box full-box">
+                    {{ form_widget(registrationForm.email, {'required': true}) }}
+                    <label>Email</label>
+                </div>
+                <div class="user-box full-box">
+                    {{ form_widget(registrationForm.username, {'required': true}) }}
+                    <label>Username</label>
+                </div>
+                <div class="flex-box">
+                    <div class="user-box half-box">
+                        {{ form_widget(registrationForm.firstName, {'required': true}) }}
 
-{% block body %}
-    {% for flash_error in app.flashes('verify_email_error') %}
-        <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
-    {% endfor %}
+                        <label>First Name</label>
+                    </div>
+                    <div class="user-box half-box">
+                        {{ form_widget(registrationForm.lastName, {'required': true}) }}
 
-    <h1>Register</h1>
+                        <label>Last Name</label>
+                    </div>
+                </div>
+                <div class="flex-box">
+                    <div class="user-box half-box">
+                        {{ form_widget(registrationForm.age, {'required': true}) }}
 
-    {{ form_start(registrationForm) }}
-        {{ form_row(registrationForm.username) }}
-        {{ form_row(registrationForm.plainPassword, {
-            label: 'Password'
-        }) }}
-        {{ form_row(registrationForm.agreeTerms) }}
+                        <label>Age</label>
+                    </div>
+                    <div class="user-box half-box">
+                        {{ form_widget(registrationForm.nationality, {'required': true}) }}
 
-        <button type="submit" class="btn">Register</button>
-    {{ form_end(registrationForm) }}
-{% endblock %}
+                        <label>Nationality</label>
+                    </div>
+                </div>
+                <div class="user-box full-box last-box">
+                    {{ form_widget(registrationForm.plainPassword, {'required': true}) }}
+
+                    <label>Password</label>
+                </div>
+                <p class="text-register">
+                    {{ form_widget(registrationForm.agreeTerms, {'required': true}) }} Agree Terms
+                </p>
+
+                <a href="#" id="submit-form">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    Submit
+                </a>
+                {{ form_end(registrationForm) }}
+                <p>
+                    Already have an account?
+                    <a href="./login.html" class="a2">Log in!</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script
+        src="https://kit.fontawesome.com/f0a0962bc1.js"
+        crossorigin="anonymous"
+></script>
+<script src="{{ asset("assets/js/register.js") }}"></script>
+</body>
+</html>
