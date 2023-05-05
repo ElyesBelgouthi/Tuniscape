@@ -1,20 +1,59 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello FoodController!{% endblock %}
+{% block title %}Dishes{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+    <div class="container">
+        {% for message in app.session.flashBag.get('success') %}
+            <div class="alert alert-success">
+                {{ message }}
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/Users/Wapiex/Desktop/Symfony Web Projects/Tuniscape/src/Controller/FoodController.php'|file_link(0) }}">src/Controller/FoodController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/Users/Wapiex/Desktop/Symfony Web Projects/Tuniscape/templates/food/index.html.twig'|file_link(0) }}">templates/food/index.html.twig</a></code></li>
-    </ul>
-</div>
+            </div>
+        {% endfor %}
+        {% for message in app.session.flashBag.get('alert') %}
+            <div class="alert alert-danger">
+                {{ message }}
+
+            </div>
+        {% endfor %}
+        <div class="container">
+            <div class="row">
+                <div class="col"><h1>Dishes/Foods</h1></div>
+                <div class="col"><a style="margin-top: 7px" href="{{ path('app_food_edit') }}" class="btn btn-success">add</a></div>
+            </div>
+
+
+
+        </div>
+
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Description</th>
+                <th scope="col">Actions</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            {% for food in foods %}
+                <tr>
+                    <td>{{ food.name }}</td>
+                    <td>{{ food.description }}</td>
+                    <td><a href="{{ path('app_food_delete', {id: food.id} ) }}" class="btn btn-danger">delete</a>
+                        <a href="{{ path('app_food_edit', {id: food.id} ) }}" class="btn btn-primary">edit</a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+
+
+{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 {% endblock %}
