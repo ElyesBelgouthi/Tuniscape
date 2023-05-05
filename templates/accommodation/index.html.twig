@@ -17,7 +17,16 @@
 
             </div>
         {% endfor %}
-        <h1 >Accommodations</h1>
+        <div class="container">
+            <div class="row">
+                <div class="col"><h1>Accommodations</h1></div>
+                <div class="col"><a href="{{ path('app_accommodation_edit') }}" class="btn btn-success">add</a></div>
+            </div>
+
+
+
+        </div>
+
         <table class="table">
             <thead>
             <tr>
@@ -35,7 +44,7 @@
                     <td>{{ accommodation.name }}</td>
                     <td>{{ accommodation.type }}</td>
                     <td>{{ accommodation.description }}</td>
-                    <td>Todo</td>
+                    <td>{{ accommodation.region.name }}</td>
                     <td><a href="{{ path('app_accommodation_delete', {id: accommodation.id} ) }}" class="btn btn-danger">delete</a>
                         <a href="{{ path('app_accommodation_edit', {id: accommodation.id} ) }}" class="btn btn-primary">edit</a>
                     </td>
