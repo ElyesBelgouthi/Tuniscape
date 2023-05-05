@@ -1,34 +1,38 @@
 <?php
 
+
 namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\RegistrationFormType;
-use App\Security\EmailVerifier;
 use App\Security\LoginAuthenticator;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Mailer\Mailer;
+use Symfony\Component\Mailer\Transport;
 use Symfony\Component\Mime\Address;
+use Symfony\Component\Mime\Email;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\UserAuthenticatorInterface;
-use Symfony\Contracts\Translation\TranslatorInterface;
-use SymfonyCasts\Bundle\VerifyEmail\Exception\VerifyEmailExceptionInterface;
+use Symfony\Component\Mailer\MailerInterface;
+
 
 class RegistrationController extends AbstractController
 {
-    private EmailVerifier $emailVerifier;
-
-    public function __construct(EmailVerifier $emailVerifier)
-    {
-        $this->emailVerifier = $emailVerifier;
-    }
-
+    /**
+     * @throws \Exception
+     */
     #[Route('/register', name: 'app_register')]
-    public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, UserAuthenticatorInterface $userAuthenticator, LoginAuthenticator $authenticator, EntityManagerInterface $entityManager): Response
+    public function register(
+        Request                     $request,
+        UserPasswordHasherInterface $userPasswordHasher,
+        UserAuthenticatorInterface  $userAuthenticator,
+        LoginAuthenticator $authenticator,
+        EntityManagerInterface      $entityManager,
+    ): Response
     {
         $user = new User();
         $form = $this->createForm(RegistrationFormType::class, $user);
@@ -43,18 +47,33 @@ class RegistrationController extends AbstractController
                 )
             );
 
+            // Generate a verification code
+            $verficationCode = random_int(100000, 999999);
+            $user->setVerficationCode($verficationCode);
+
             $entityManager->persist($user);
             $entityManager->flush();
+            $dsn = 'smtp://tuniscape%40gmail.com:aezaetrfsezujwpt@smtp.gmail.com:587';
+            $transport = Transport::fromDsn($dsn);
+            $mailer = new Mailer($transport);
+            // Create a new Email instance
+            $email = (new Email())
+                ->from(new Address('tuniscape@gmail.com', 'Tuniscape'))
+                ->to($user->getEmail())
+                ->subject('Please Confirm your Email')
+                ->html("
+                    <h1>Hi! Please confirm your email!</h1>
+                    <p>
+                        Please confirm your email address by clicking the following link: <br><br>
+                        <a href=\"https://localhost:8000/register/verify/{$verficationCode}\">Confirm my Email</a>.
+                    </p>
+                    <p>
+                        Cheers!
+                    </p>
+                ");
 
-            // generate a signed url and email it to the user
-            $this->emailVerifier->sendEmailConfirmation('app_verify_email', $user,
-                (new TemplatedEmail())
-                    ->from(new Address('tuniscape@gmail.com', 'Tuniscape'))
-                    ->to($user->getEmail())
-                    ->subject('Please Confirm your Email')
-                    ->htmlTemplate('registration/confirmation_email.html.twig')
-            );
-            // do anything else you need here, like send an email
+            // Send the email
+            $mailer->send($email);
 
             return $userAuthenticator->authenticateUser(
                 $user,
@@ -68,23 +87,27 @@ class RegistrationController extends AbstractController
         ]);
     }
 
-    #[Route('/verify/email', name: 'app_verify_email')]
-    public function verifyUserEmail(Request $request, TranslatorInterface $translator): Response
+    #[Route('/register/verify/{code}', name: 'app_verify_email')]
+    public function verifyUserEmail(
+        string                 $code,
+        EntityManagerInterface $entityManager
+    ): Response
     {
-        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+        $user = $entityManager->getRepository(User::class)->findOneBy(['verficationCode' => $code]);
 
-        // validate email confirmation link, sets User::isVerified=true and persists
-        try {
-            $this->emailVerifier->handleEmailConfirmation($request, $this->getUser());
-        } catch (VerifyEmailExceptionInterface $exception) {
-            $this->addFlash('verify_email_error', $translator->trans($exception->getReason(), [], 'VerifyEmailBundle'));
+        if ($user) {
+            $user->setIsVerified(true);
+            $user->setVerficationCode(null);
+            $entityManager->flush();
+
+            $this->addFlash('success', 'Your email address has been verified.');
+
+            return $this->redirectToRoute('app_home');
+        } else {
+            $this->addFlash('error', 'Invalid verfication code.');
 
             return $this->redirectToRoute('app_register');
         }
-
-        // @TODO Change the redirect on success and handle or remove the flash message in your templates
-        $this->addFlash('success', 'Your email address has been verified.');
-
-        return $this->redirectToRoute('app_register');
     }
 }
+
