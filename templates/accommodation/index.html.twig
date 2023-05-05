@@ -3,7 +3,21 @@
 {% block title %}Accommodations{% endblock %}
 
 {% block body %}
+
     <div class="container">
+        {% for message in app.session.flashBag.get('success') %}
+            <div class="alert alert-success">
+                {{ message }}
+
+            </div>
+        {% endfor %}
+        {% for message in app.session.flashBag.get('alert') %}
+            <div class="alert alert-danger">
+                {{ message }}
+
+            </div>
+        {% endfor %}
+        <h1 >Accommodations</h1>
         <table class="table">
             <thead>
             <tr>
@@ -11,6 +25,7 @@
                 <th scope="col">Type</th>
                 <th scope="col">Description</th>
                 <th scope="col">Region</th>
+                <th scope="col">Actions</th>
             </tr>
             </thead>
 
@@ -21,6 +36,9 @@
                     <td>{{ accommodation.type }}</td>
                     <td>{{ accommodation.description }}</td>
                     <td>Todo</td>
+                    <td><a href="{{ path('app_accommodation_delete', {id: accommodation.id} ) }}" class="btn btn-danger">delete</a>
+                        <a href="{{ path('app_accommodation_edit', {id: accommodation.id} ) }}" class="btn btn-primary">edit</a>
+                    </td>
                 </tr>
             {% endfor %}
             </tbody>
