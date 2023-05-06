@@ -3,3 +3,15 @@ controllers:
         path: ../src/Controller/
         namespace: App\Controller
     type: attribute
+explore:
+    path: /explore
+    controller: App\Controller\ExploreController::index
+accommodation_show:
+    path: /accommodation/{id}
+    controller: App\Controller\AccommodationController
+food_show:
+    path: /food/{id}
+    controller: App\Controller\FoodController
+activity_show:
+    path: /activity/{id}
+    controller: App\Controller\ActivityController

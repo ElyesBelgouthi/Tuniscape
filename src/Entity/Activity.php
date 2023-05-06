@@ -4,6 +4,8 @@ namespace App\Entity;
 
 use App\Repository\ActivityRepository;
 use Doctrine\DBAL\Types\Types;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: ActivityRepository::class)]
@@ -93,4 +95,38 @@ class Activity
 
         return $this;
     }
+    #[ORM\ManyToMany(targetEntity: Reservation::class, inversedBy: "activity")]
+    private Collection $reservations;
+
+    public function __construct()
+    {
+        $this->reservations = new ArrayCollection();
+    }
+
+    // ...
+
+    public function getReservations(): Collection
+    {
+        return $this->reservations;
+    }
+    public function addReservation(Reservation $reservation): self
+    {
+        if (!$this->reservations->contains($reservation)) {
+            $this->reservations[] = $reservation;
+            $reservation->addActivity($this);
+        }
+
+        return $this;
+    }
+
+    public function removeReservation(Reservation $reservation): self
+    {
+        if ($this->reservations->removeElement($reservation)) {
+            $reservation->removeActivity($this);
+        }
+
+        return $this;
+    }
+
+
 }

@@ -1,0 +1,213 @@
+    <!DOCTYPE html>
+    <html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>explore now</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.4.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+              integrity="sha384-KyZXEAg3QhqLMpG8r+Knujsl7/1L_dstPt3HV5HzF6Gvk/e3E1wPGZF5_M8ydObm" crossorigin="anonymous">
+
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+        <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
+        <link rel="stylesheet" href="{{ asset('assets/css/calender/cal.css') }}" />
+        <link rel="stylesheet" href="{{ asset('assets/css/styles.css'      ) }}" >
+        <link rel="stylesheet" href="{{ asset('assets/css/styles2.css'      ) }}" >
+        <link rel="stylesheet" href="{{ asset('assets/css/style.css'      ) }}" >
+    </head>
+
+    <body>
+    <header>
+        <div class="logo">
+            <img src="img/logo2.png" />
+        </div>
+        <nav class="nav">
+            <ul class="nav__list">
+                <li class="nav__item"><a href="index.html" class="nav__link">Home</a></li>
+                <li class="nav__item">
+                    <a href="#services" class="nav__link">Services</a>
+                </li>
+                <li class="nav__item">
+                    <a href="#about" class="nav__link">About us</a>
+                </li>
+                <li class="nav__item">
+                    <a href="login.html"><button class="login--btn btn">LOGIN</button></a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <div class="bg">
+
+            <section id="cart">
+                <h1 class="section__title section__title--intro animate__animated animate__fadeInLeft">
+                    <strong>TUNISIA</strong>
+                </h1>
+            </section>
+            <div class="category-block2">
+                <div class="text-container sectionTitle">
+                    <p>Your Passport to Tunisia's Rich Culture and Cuisine: Explore Accommodation and Dining on
+                        Tuniscape.</p>
+                </div>
+                <div><a class="explore--btn btn animate__animated animate__fadeInUp exploreButton2 " href="#to-live">
+                        where to live
+
+                    </a>
+                    <a class="explore--btn btn animate__animated animate__fadeInUp exploreButton2" href="#to-visit">
+                        visit
+                    </a>
+
+                    <a class="explore--btn btn animate__animated animate__fadeInUp exploreButton2" href="#to-eat">
+                        eat
+                    </a>
+                </div>
+
+
+
+
+            </div>
+            <!-- loula -->
+            <div class="category-block" id="to-live">
+                <div class="see-more"><h3 class="section-title sectionTitle">What to eat?</h3>
+                    <a id="fold" href="live-catalog.html">
+                        <b>Show Catalog !</b>
+                    </a></div>
+
+
+                <div class="scrollable">
+
+                    {% for card in pcards %}
+                        <div class="card">
+                            <img class="img-card" src="{{ asset('assets/img/hotels/leRoyal.jpg'  ) }}" width="100%" height="100%" alt="Card image">
+                            <div class="textBox">
+                                <h3>{{ card.name }}</h3>
+                                <p>{{ card.description }}</p>
+                                <a href="{{ path('accommodation_show', {'id': card.id}) }}" class="login--btn btn">More</a>
+                                <button accommodation-id="{{ card.id }}" class="login--btn btn add-btn">Add</button>
+                            </div>
+                        </div>
+                    {% endfor %}
+
+                    <button class="scroll-button left-button">&lt;</button>
+                    <button class="scroll-button right-button">&gt;</button>
+                </div>
+            </div>
+
+            <div class="category-block" id="to-eat">
+                <div class="see-more"><h3 class="section-title sectionTitle">choose where to live</h3>
+                    <a id="fold" href="live-catalog.html">
+                        <b>Show Catalog !</b>
+                    </a></div>
+
+
+                <div class="scrollable">
+
+                    {% for card in fcards %}
+                        <div class="card">
+                            <img class="img-card" src="{{ asset('assets/img/hotels/leRoyal.jpg'  ) }}" width="100%" height="100%" alt="Card image">
+                            <div class="textBox">
+                                <h3>{{ card.name }}</h3>
+                                <p>{{ card.description }}</p>
+                                <a href="{{ path('food_show', {'id': card.id}) }}" class="login--btn btn">More</a>
+                                <button food-id="{{ card.id }}" class="login--btn btn add-btn">Add</button>
+                            </div>
+                        </div>
+                    {% endfor %}
+
+                    <button class="scroll-button left-button">&lt;</button>
+                    <button class="scroll-button right-button">&gt;</button>
+                </div>
+            </div>
+            <div class="category-block" id="to-do">
+                <div class="see-more"><h3 class="section-title sectionTitle">What to do</h3>
+                    <a id="fold" href="live-catalog.html">
+                        <b>Show Catalog !</b>
+                    </a></div>
+
+
+                <div class="scrollable">
+
+                    {% for card in acards %}
+                        <div class="card">
+                            <img class="img-card" src="{{ asset('assets/img/hotels/leRoyal.jpg'  ) }}" width="100%" height="100%" alt="Card image">
+                            <div class="textBox">
+                                <h3>{{ card.name }}</h3>
+                                <p>{{ card.description }}</p>
+                                <a href="{{ path('activity_show', {'id': card.id}) }}" class="login--btn btn">More</a>
+                                <button activity-id="{{ card.id }}" class="login--btn btn add-btn">Add</button>
+                            </div>
+                        </div>
+                    {% endfor %}
+
+                    <button class="scroll-button left-button">&lt;</button>
+                    <button class="scroll-button right-button">&gt;</button>
+                </div>
+            </div>
+
+
+
+        </div>
+    </main>
+
+    <footer>
+
+    </footer>
+
+    <script src="cart.js"></script>
+    </body>
+    {% block javascripts %}
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const addButtons = document.querySelectorAll('.add-btn');
+
+                addButtons.forEach(function(button) {
+                    button.addEventListener('click', async function() {
+                        const aid = button.getAttribute('activity-id');
+                        const fid = button.getAttribute('food-id');
+                        const pid = button.getAttribute('accommodation-id');
+
+                        let requestBody = '';
+
+                        if (aid) {
+                            requestBody += `activity_id=${aid}`;
+                        }
+
+                        if (fid) {
+                            if (requestBody) {
+                                requestBody += '&';
+                            }
+                            requestBody += `food_id=${fid}`;
+                        }
+
+                        if (pid) {
+                            if (requestBody) {
+                                requestBody += '&';
+                            }
+                            requestBody += `accommodation_id=${pid}`;
+                        }
+
+                        const response = await fetch('{{ path('explore_add') }}', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/x-www-form-urlencoded',
+                            },
+                            body: requestBody,
+                        });
+
+                        if (response.ok) {
+                            // Update the page without reloading it, e.g., display a success message
+                        } else {
+                            // Handle errors, e.g., display an error message
+                        }
+                    });
+                });
+            });
+        </script>
+    {% endblock %}
+
+
+
+
+    </html>
