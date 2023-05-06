@@ -4,75 +4,74 @@ namespace App\Controller;
 
 use App\Entity\Accommodation;
 use App\Form\AccommodationType;
-use App\Repository\AccommodationRepository;
+use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('/accommodation')]
 class AccommodationController extends AbstractController
-{
-    #[Route('/', name: 'app_accommodation_index', methods: ['GET'])]
-    public function index(AccommodationRepository $accommodationRepository): Response
-    {
-        return $this->render('accommodation/index.html.twig', [
-            'accommodations' => $accommodationRepository->findAll(),
+{   #[Route('/accommodation', 'accommodation_list_all')]
+    public function index(ManagerRegistry $doctrine) : Response{
+        $repository = $doctrine->getRepository(Accommodation::class);
+        $accommodations = $repository->findAll();
+        return $this->render("accommodation/index.html.twig",[
+            'accommodations' => $accommodations
         ]);
-    }
 
-    #[Route('/new', name: 'app_accommodation_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, AccommodationRepository $accommodationRepository): Response
-    {
+    }
+    #[Route('/accommodation/edit/{id?0}', name: 'app_accommodation_edit')]
+    public function addAccommodation(Request $request, EntityManagerInterface $entityManager, Accommodation $accommodation = null): Response
+    {   $isAdded = false;
+
+        if(!$accommodation){
         $accommodation = new Accommodation();
+        $isAdded = true;
+        }
+
         $form = $this->createForm(AccommodationType::class, $accommodation);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $accommodationRepository->save($accommodation, true);
+        if($form->isSubmitted()){
+            $entityManager->persist($accommodation);
+            $entityManager->flush();
+            if($isAdded){
+                $message = "the accommodation " . $accommodation->getId() . " : " . $accommodation->getName() . " has been successfully added!";
+            }else{
+                $message = "the accommodation " . $accommodation->getId() . " : " . $accommodation->getName() . " has been successfully edited!";
 
-            return $this->redirectToRoute('app_accommodation_index', [], Response::HTTP_SEE_OTHER);
+            }
+            $this->addFlash("success", $message);
+            return $this->redirectToRoute('accommodation_list_all');
         }
 
-        return $this->renderForm('accommodation/new.html.twig', [
-            'accommodation' => $accommodation,
-            'form' => $form,
+        return $this->render('accommodation/add.html.twig', [
+            'form'=>$form->createView(),
         ]);
     }
 
-    #[Route('/{id}', name: 'app_accommodation_show', methods: ['GET'])]
-    public function show(Accommodation $accommodation): Response
-    {
-        return $this->render('accommodation/show.html.twig', [
-            'accommodation' => $accommodation,
-        ]);
-    }
-
-    #[Route('/{id}/edit', name: 'app_accommodation_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Accommodation $accommodation, AccommodationRepository $accommodationRepository): Response
-    {
-        $form = $this->createForm(AccommodationType::class, $accommodation);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $accommodationRepository->save($accommodation, true);
-
-            return $this->redirectToRoute('app_accommodation_index', [], Response::HTTP_SEE_OTHER);
+    #[Route('/accommodation/delete/{id}', 'app_accommodation_delete')]
+    public function deleteAccommodation( EntityManagerInterface $entityManager, Accommodation $accommodation = null): RedirectResponse {
+        if($accommodation){
+            $entityManager->remove($accommodation);
+            $entityManager->flush();
+            $this->addFlash("success", "the accommodation " . $accommodation->getName() . " has been successfully deleted!");
+        } else {
+            $this->addFlash("alert", "the accommodation does not exist!");
         }
+        return $this->redirectToRoute('accommodation_list_all');
 
-        return $this->renderForm('accommodation/edit.html.twig', [
-            'accommodation' => $accommodation,
-            'form' => $form,
+
+
+    }
+
+    /*#[Route('/accommodation/{id}', name: 'app_accommodation_success')]
+    public function success(Accommodation $accommodation){
+        return $this->render("accommodation/success.html.twig",[
+            'accommodation'=>$accommodation,
         ]);
-    }
 
-    #[Route('/{id}', name: 'app_accommodation_delete', methods: ['POST'])]
-    public function delete(Request $request, Accommodation $accommodation, AccommodationRepository $accommodationRepository): Response
-    {
-        if ($this->isCsrfTokenValid('delete'.$accommodation->getId(), $request->request->get('_token'))) {
-            $accommodationRepository->remove($accommodation, true);
-        }
-
-        return $this->redirectToRoute('app_accommodation_index', [], Response::HTTP_SEE_OTHER);
-    }
+    }*/
 }
