@@ -39,7 +39,7 @@ class Reservation
     #[ORM\ManyToMany(targetEntity: Accommodation::class, mappedBy: "reservations")]
     private Collection $Accommodations;
 
-    #[ORM\ManyToMany(targetEntity: Food::class, mappedBy: "reservations")]
+    #[ORM\ManyToMany(targetEntity: Food::class, mappedBy: "reservations"),]
     private Collection $foods;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
@@ -129,12 +129,7 @@ class Reservation
         return $this;
     }
 
-    public function removeActivity(Activity $activity): self
-    {
-        $this->activity->removeElement($activity);
 
-        return $this;
-    }
 
     /**
      * @return Collection<int, Accommodation>
@@ -153,12 +148,7 @@ class Reservation
         return $this;
     }
 
-    public function removeAccommodation(Accommodation $accommodation): self
-    {
-        $this->Accommodations->removeElement($accommodation);
 
-        return $this;
-    }
 
     /**
      * @return Collection<int, Food>
@@ -166,6 +156,10 @@ class Reservation
     public function getFoods(): Collection
     {
         return $this->foods;
+    }
+    public function getActivities(): Collection
+    {
+        return $this->activity;
     }
 
     public function addFood(Food $food): self
@@ -180,7 +174,20 @@ class Reservation
     public function removeFood(Food $food): self
     {
         $this->foods->removeElement($food);
+        $food->removeReservation($this); // Add this line
+        return $this;
+    }
 
+    public function removeAccommodation(Accommodation $accommodation): self
+    {
+        $this->Accommodations->removeElement($accommodation);
+        $accommodation->removeReservation($this); // Add this line
+        return $this;
+    }
+    public function removeActivity (Activity $activity): self
+    {
+        $this->activity->removeElement($activity);
+        $activity->removeReservation($this); // Add this line
         return $this;
     }
 

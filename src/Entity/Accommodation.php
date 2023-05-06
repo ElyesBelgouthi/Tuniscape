@@ -140,7 +140,7 @@ class Accommodation
     public function removeReservation(Reservation $reservation): self
     {
         if ($this->reservations->removeElement($reservation)) {
-            $reservation->removeReservation($this);
+            $reservation->removeAccommodation($this);
         }
 
         return $this;
