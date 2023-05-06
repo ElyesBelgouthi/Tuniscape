@@ -15,14 +15,14 @@ class CartController extends AbstractController
     public function index(AccommodationRepository $accommodationRepository, FoodRepository $foodRepository
         , ActivityRepository  $activityRepository): Response
     {
-        $pgs = $accommodationRepository->findAll();
-        $fgs = $foodRepository->findAll();
-        $ags = $activityRepository->findAll();
+        $accommodationCards = $accommodationRepository->findAll();
+        $foodCards = $foodRepository->findAll();
+        $activityCards = $activityRepository->findAll();
 
         return $this->render('cart/index.html.twig', [
-            'pcards' => $pgs,
-            'fcards' => $fgs,
-            'acards' => $ags
+            'accommodationCards' => $accommodationCards,
+            'foodCards' => $foodCards,
+            'activityCards' => $activityCards
         ]);
     }
 }
