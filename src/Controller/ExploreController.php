@@ -11,9 +11,7 @@ use App\Service\ReservationService;
 use Symfony\Component\HttpFoundation\Request;
 class ExploreController extends AbstractController
 {
-    /**
-     * @Route("/explore", name="explore")
-     */
+    #[Route('/explore', name: 'app_explore')]
     public function index(AccommodationRepository $accommodationRepository, FoodRepository $foodRepository
         , ActivityRepository                      $activityRepository): Response
     {
@@ -27,9 +25,7 @@ class ExploreController extends AbstractController
             'acards' => $ags
         ]);
     }
-    /**
-     * @Route("/explore/add", name="explore_add")
-     */
+    #[Route('/explore/add', name: 'app_explore_add')]
     public function addAction(
         Request $request,
         ReservationService $reservationService,
@@ -43,7 +39,7 @@ class ExploreController extends AbstractController
         $user = $this->getUser();
         if ($user === null) {
             // handle the case when the user is not logged in, e.g., redirect to the login page
-            return $this->redirectToRoute('login_route');
+            return $this->redirectToRoute('app_login');
         }
 
         $userId = $user->getId();

@@ -45,12 +45,12 @@ class Reservation
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $updatedAt = null;
 
-    #[ORM\ManyToOne]
-    private ?User $user_id = null;
-
-    #[ORM\ManyToOne]
+    #[ORM\ManyToOne(inversedBy: 'reservations')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?User $user = null;
+    private ?User $User = null;
+
+    #[ORM\Column]
+    private ?bool $isConfirmed = false;
 
     public function __construct()
     {
@@ -213,26 +213,28 @@ class Reservation
         $this->updatedAt = new \DateTime();
     }
 
-    public function getUserId(): ?User
-    {
-        return $this->user_id;
-    }
 
-    public function setUserId(?User $user_id): self
-    {
-        $this->user_id = $user_id;
-
-        return $this;
-    }
 
     public function getUser(): ?User
     {
-        return $this->user;
+        return $this->User;
     }
 
     public function setUser(?User $user): self
     {
-        $this->user = $user;
+        $this->User = $user;
+
+        return $this;
+    }
+
+    public function isIsConfirmed(): ?bool
+    {
+        return $this->isConfirmed;
+    }
+
+    public function setIsConfirmed(bool $isConfirmed): self
+    {
+        $this->isConfirmed = $isConfirmed;
 
         return $this;
     }

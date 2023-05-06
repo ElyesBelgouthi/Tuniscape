@@ -81,9 +81,6 @@ class ReservationService
             $reservation->setUser($user);
         }
 
-
-
-
         $reservation->setStartDate($startDate);
         $reservation->setEndDate($endDate);
         $reservation->setStatus($status);
