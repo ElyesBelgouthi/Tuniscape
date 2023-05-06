@@ -1,43 +1,63 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Accommodation index{% endblock %}
+{% block title %}Accommodations{% endblock %}
 
 {% block body %}
-    <h1>Accommodation index</h1>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>Type</th>
-                <th>Description</th>
-                <th>Latitude</th>
-                <th>Longitude</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for accommodation in accommodations %}
-            <tr>
-                <td>{{ accommodation.id }}</td>
-                <td>{{ accommodation.name }}</td>
-                <td>{{ accommodation.type }}</td>
-                <td>{{ accommodation.description }}</td>
-                <td>{{ accommodation.latitude }}</td>
-                <td>{{ accommodation.longitude }}</td>
-                <td>
-                    <a href="{{ path('app_accommodation_show', {'id': accommodation.id}) }}">show</a>
-                    <a href="{{ path('app_accommodation_edit', {'id': accommodation.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="7">no records found</td>
-            </tr>
+    <div class="container">
+        {% for message in app.session.flashBag.get('success') %}
+            <div class="alert alert-success">
+                {{ message }}
+
+            </div>
         {% endfor %}
-        </tbody>
-    </table>
+        {% for message in app.session.flashBag.get('alert') %}
+            <div class="alert alert-danger">
+                {{ message }}
 
-    <a href="{{ path('app_accommodation_new') }}">Create new</a>
+            </div>
+        {% endfor %}
+        <div class="container">
+            <div class="row">
+                <div class="col"><h1>Accommodations</h1></div>
+                <div class="col"><a style="margin-top: 7px" href="{{ path('app_accommodation_edit') }}" class="btn btn-success">add</a></div>
+            </div>
+
+
+
+        </div>
+
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Type</th>
+                <th scope="col">Description</th>
+                <th scope="col">Region</th>
+                <th scope="col">Actions</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            {% for accommodation in accommodations %}
+                <tr>
+                    <td>{{ accommodation.name }}</td>
+                    <td>{{ accommodation.type }}</td>
+                    <td>{{ accommodation.description }}</td>
+                    <td>{{ accommodation.region.name }}</td>
+                    <td><a href="{{ path('app_accommodation_delete', {id: accommodation.id} ) }}" class="btn btn-danger">delete</a>
+                        <a href="{{ path('app_accommodation_edit', {id: accommodation.id} ) }}" class="btn btn-primary">edit</a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+
+
+{% endblock %}
+
+{% block stylesheets %}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 {% endblock %}

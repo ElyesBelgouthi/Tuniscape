@@ -4,75 +4,68 @@ namespace App\Controller;
 
 use App\Entity\Activity;
 use App\Form\ActivityType;
-use App\Repository\ActivityRepository;
+use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('/activity')]
 class ActivityController extends AbstractController
 {
-    #[Route('/', name: 'app_activity_index', methods: ['GET'])]
-    public function index(ActivityRepository $activityRepository): Response
-    {
-        return $this->render('activity/index.html.twig', [
-            'activities' => $activityRepository->findAll(),
+    #[Route('/activity', 'activity_list_all')]
+    public function index(ManagerRegistry $doctrine) : Response{
+        $repository = $doctrine->getRepository(Activity::class);
+        $activities = $repository->findAll();
+        return $this->render("activity/index.html.twig",[
+            'activities' => $activities
         ]);
-    }
 
-    #[Route('/new', name: 'app_activity_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, ActivityRepository $activityRepository): Response
-    {
-        $activity = new Activity();
+    }
+    #[Route('/activity/edit/{id?0}', name: 'app_activity_edit')]
+    public function addActivity(Request $request, EntityManagerInterface $entityManager, Activity $activity = null): Response
+    {   $isAdded = false;
+
+        if(!$activity){
+            $activity = new Activity();
+            $isAdded = true;
+        }
+
         $form = $this->createForm(ActivityType::class, $activity);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $activityRepository->save($activity, true);
+        if($form->isSubmitted()){
+            $entityManager->persist($activity);
+            $entityManager->flush();
+            if($isAdded){
+                $message = "the activity " . $activity->getId() . " : " . $activity->getName() . " has been successfully added!";
+            }else{
+                $message = "the activity " . $activity->getId() . " : " . $activity->getName() . " has been successfully edited!";
 
-            return $this->redirectToRoute('app_activity_index', [], Response::HTTP_SEE_OTHER);
+            }
+            $this->addFlash("success", $message);
+            return $this->redirectToRoute('activity_list_all');
         }
 
-        return $this->renderForm('activity/new.html.twig', [
-            'activity' => $activity,
-            'form' => $form,
+        return $this->render('activity/add.html.twig', [
+            'form'=>$form->createView(),
         ]);
     }
 
-    #[Route('/{id}', name: 'app_activity_show', methods: ['GET'])]
-    public function show(Activity $activity): Response
-    {
-        return $this->render('activity/show.html.twig', [
-            'activity' => $activity,
-        ]);
-    }
-
-    #[Route('/{id}/edit', name: 'app_activity_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Activity $activity, ActivityRepository $activityRepository): Response
-    {
-        $form = $this->createForm(ActivityType::class, $activity);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $activityRepository->save($activity, true);
-
-            return $this->redirectToRoute('app_activity_index', [], Response::HTTP_SEE_OTHER);
+    #[Route('/activity/delete/{id}', 'app_activity_delete')]
+    public function deleteActivity( EntityManagerInterface $entityManager, Activity $activity = null): RedirectResponse {
+        if($activity){
+            $entityManager->remove($activity);
+            $entityManager->flush();
+            $this->addFlash("success", "the activity " . $activity->getName() . " has been successfully deleted!");
+        } else {
+            $this->addFlash("alert", "the activity does not exist!");
         }
+        return $this->redirectToRoute('activity_list_all');
 
-        return $this->renderForm('activity/edit.html.twig', [
-            'activity' => $activity,
-            'form' => $form,
-        ]);
+
+
     }
 
-    #[Route('/{id}', name: 'app_activity_delete', methods: ['POST'])]
-    public function delete(Request $request, Activity $activity, ActivityRepository $activityRepository): Response
-    {
-        if ($this->isCsrfTokenValid('delete'.$activity->getId(), $request->request->get('_token'))) {
-            $activityRepository->remove($activity, true);
-        }
-
-        return $this->redirectToRoute('app_activity_index', [], Response::HTTP_SEE_OTHER);
-    }
 }
