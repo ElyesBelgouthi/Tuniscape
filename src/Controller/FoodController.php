@@ -12,6 +12,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+
 class FoodController extends AbstractController
 {
     #[Route('/food', 'food_list_all')]
@@ -63,8 +64,6 @@ class FoodController extends AbstractController
             $this->addFlash("alert", "the food does not exist!");
         }
         return $this->redirectToRoute('food_list_all');
-
-
 
     }
 }

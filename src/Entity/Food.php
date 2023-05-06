@@ -3,7 +3,9 @@
 namespace App\Entity;
 
 use App\Repository\FoodRepository;
-use Doctrine\DBAL\Types\Types;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
+guse Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: FoodRepository::class)]
@@ -48,4 +50,37 @@ class Food
 
         return $this;
     }
+    #[ORM\ManyToMany(targetEntity: Reservation::class, inversedBy: "food")]
+    private Collection $reservations;
+
+    public function __construct()
+    {
+        $this->reservations = new ArrayCollection();
+    }
+
+    // ...
+
+    public function getReservations(): Collection
+    {
+        return $this->reservations;
+    }
+    public function addReservation(Reservation $reservation): self
+    {
+        if (!$this->reservations->contains($reservation)) {
+            $this->reservations[] = $reservation;
+            $reservation->addFood($this);
+        }
+
+        return $this;
+    }
+
+    public function removeReservation(Reservation $reservation): self
+    {
+        if ($this->reservations->removeElement($reservation)) {
+            $reservation->removeFood($this);
+        }
+
+        return $this;
+    }
+
 }

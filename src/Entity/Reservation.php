@@ -8,6 +8,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
+
 #[ORM\Entity(repositoryClass: ReservationRepository::class),ORM\HasLifecycleCallbacks()]
 
 class Reservation
@@ -22,24 +23,34 @@ class Reservation
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $endDate = null;
-
+    /**
+     * @ORM\OneToMany(targetEntity=ReservationAccommodation::class, mappedBy="accommodation")
+     */
+    private Collection $reservations;
     #[ORM\Column(type: Types::SMALLINT)]
     private ?int $status = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $createdAt = null;
 
-    #[ORM\ManyToMany(targetEntity: Activity::class)]
+    #[ORM\ManyToMany(targetEntity: Activity::class, mappedBy: "reservations")]
     private Collection $activity;
 
-    #[ORM\ManyToMany(targetEntity: Accommodation::class)]
+    #[ORM\ManyToMany(targetEntity: Accommodation::class, mappedBy: "reservations")]
     private Collection $Accommodations;
 
-    #[ORM\ManyToMany(targetEntity: Food::class)]
+    #[ORM\ManyToMany(targetEntity: Food::class, mappedBy: "reservations")]
     private Collection $foods;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $updatedAt = null;
+
+    #[ORM\ManyToOne]
+    private ?User $user_id = null;
+
+    #[ORM\ManyToOne]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?User $user = null;
 
     public function __construct()
     {
@@ -200,5 +211,29 @@ class Reservation
     public function onPreUpdate(): void
     {
         $this->updatedAt = new \DateTime();
+    }
+
+    public function getUserId(): ?User
+    {
+        return $this->user_id;
+    }
+
+    public function setUserId(?User $user_id): self
+    {
+        $this->user_id = $user_id;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
+
+        return $this;
     }
 }

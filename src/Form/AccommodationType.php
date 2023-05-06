@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Accommodation;
+
 use App\Entity\Region;
 use Doctrine\ORM\Mapping\Entity;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -32,8 +33,7 @@ class AccommodationType extends AbstractType
                 'class'=>Region::class,
                 'choice_label'=>'name',
             ])
-            ->add("Add", SubmitType::class)
-        ;
+            ->add("Add", SubmitType::class);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

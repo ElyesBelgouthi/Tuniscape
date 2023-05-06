@@ -4,11 +4,24 @@ namespace App\Entity;
 
 use App\Repository\AccommodationRepository;
 use Doctrine\DBAL\Types\Types;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: AccommodationRepository::class)]
 class Accommodation
 {
+    public function __construct()
+    {
+        $this->reservations = new ArrayCollection();
+    }
+
+    // ...
+
+    public function getReservations(): Collection
+    {
+        return $this->reservations;
+    }
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -108,4 +121,29 @@ class Accommodation
 
         return $this;
     }
+    public function __toString(): string
+    {
+        return $this->name;
+    }
+    #[ORM\ManyToMany(targetEntity: Reservation::class, inversedBy: "accommodation")]
+    private Collection $reservations;
+    public function addReservation(Reservation $reservation): self
+    {
+        if (!$this->reservations->contains($reservation)) {
+            $this->reservations[] = $reservation;
+            $reservation->addAccommodation($this);
+        }
+
+        return $this;
+    }
+
+    public function removeReservation(Reservation $reservation): self
+    {
+        if ($this->reservations->removeElement($reservation)) {
+            $reservation->removeReservation($this);
+        }
+
+        return $this;
+    }
+
 }
