@@ -18,26 +18,7 @@
     </head>
 
     <body>
-    <header>
-        <div class="logo">
-            <img src="img/logo2.png" />
-        </div>
-        <nav class="nav">
-            <ul class="nav__list">
-                <li class="nav__item"><a href="index.html" class="nav__link">Home</a></li>
-                <li class="nav__item">
-                    <a href="#services" class="nav__link">Services</a>
-                </li>
-                <li class="nav__item">
-                    <a href="#about" class="nav__link">About us</a>
-                </li>
-                <li class="nav__item">
-                    <a href="login.html"><button class="login--btn btn">LOGIN</button></a>
-                </li>
-            </ul>
-        </nav>
-    </header>
-
+    {% include "navbar.html.twig" %}
     <main>
         <div class="bg">
 
@@ -156,7 +137,6 @@
     </footer>
 
     <script src="cart.js"></script>
-    </body>
     {% block javascripts %}
         <script>
             document.addEventListener('DOMContentLoaded', function() {
@@ -188,7 +168,7 @@
                             requestBody += `accommodation_id=${pid}`;
                         }
 
-                        const response = await fetch('{{ path('explore_add') }}', {
+                        const response = await fetch('{{ path('app_explore_add') }}', {
                             method: 'POST',
                             headers: {
                                 'Content-Type': 'application/x-www-form-urlencoded',
@@ -206,8 +186,5 @@
             });
         </script>
     {% endblock %}
-
-
-
-
+    </body>
     </html>

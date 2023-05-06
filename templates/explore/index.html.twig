@@ -16,25 +16,7 @@
 </head>
 
 <body>
-<header>
-    <div class="logo">
-        <img src="img/logo2.png" />
-    </div>
-    <nav class="nav">
-        <ul class="nav__list">
-            <li class="nav__item"><a href="index.html" class="nav__link">Home</a></li>
-            <li class="nav__item">
-                <a href="#services" class="nav__link">Services</a>
-            </li>
-            <li class="nav__item">
-                <a href="#about" class="nav__link">About us</a>
-            </li>
-            <li class="nav__item">
-                <a href="login.html"><button class="login--btn btn">LOGIN</button></a>
-            </li>
-        </ul>
-    </nav>
-</header>
+{% include "navbar.html.twig" %}
 
 <main>
     <div class="bg">
@@ -61,19 +43,14 @@
                     eat
                 </a>
             </div>
-
-
-
-
         </div>
         <!-- loula -->
         <div class="category-block" id="to-live">
             <div class="see-more"><h3 class="section-title sectionTitle">choose where to live</h3>
                 <a id="fold" href="live-catalog.html">
                     <b>Show Catalog !</b>
-                </a></div>
-
-
+                </a>
+            </div>
             <!-- ... -->
             <div class="scrollable">
                 {% for card in cards %}
@@ -97,12 +74,6 @@
                 <button class="scroll-button right-button">&gt;</button>
             </div>
         </div>
-
-
-
-        <
-
-
     </div>
 </main>
 
