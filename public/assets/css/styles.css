@@ -225,6 +225,7 @@ header {
 
 .section__subtitle--intro {
     display: inline-block;
+    margin-right: 60px;
 }
 
 .explore--btn {
@@ -433,6 +434,7 @@ marquee {
 /* footer */
 
 .footer {
+
     position: relative;
     text-align: center;
     background: var(--clr-accent);
@@ -443,7 +445,7 @@ marquee {
     height: 65vh;
     width: 100%;
     margin: 0;
-    padding: 0;
+    padding: 7rem 0 0 0;
 }
 
 .flex {
@@ -761,6 +763,10 @@ marquee {
     width: var(--menu-width);
 }
 
+.main-menu a {
+    width: var(--menu-width);
+    max-height: 40px;
+}
 .menu-inner {
     position: absolute;
     width: var(--menu-width);

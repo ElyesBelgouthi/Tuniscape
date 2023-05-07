@@ -1,3 +1,7 @@
+.explore--content {
+  background-color: var(--clr-dark);
+}
+
 .scrollable {
   display: flex;
   padding: 1rem 0;
@@ -39,10 +43,9 @@
   background-color: #f0f0f0;
   padding: 2rem;
   font-family: var(--ff-primary);
-  margin-bottom: 2rem;
+  margin: 4rem auto;
   max-width: 63%;
-  margin-left: auto;
-  margin-right: auto;
+
   background: var(--clr-accent);
   box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
   backdrop-filter: blur(2px);
@@ -59,17 +62,17 @@
 }
 
 .category-block2 {
-  background-color: #f0f0f0;
   padding: 2rem;
   margin-bottom: 2rem;
   max-width: 90%;
   margin-left: auto;
   margin-right: auto;
-  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-  backdrop-filter: blur(2px);
-  -webkit-backdrop-filter: blur(2px);
+  background: rgba( 255, 255, 255, 0.35 );
+  box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+  backdrop-filter: blur( 13.5px );
+  -webkit-backdrop-filter: blur( 13.5px );
   border-radius: 10px;
-  border: 1px solid rgba(255, 255, 255, 0.18);
+  border: 1px solid rgba( 255, 255, 255, 0.18 );
   display: flex;
   justify-content: space-between;
   align-items: center;
