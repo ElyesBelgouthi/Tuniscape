@@ -45,6 +45,10 @@ class Accommodation
     #[ORM\ManyToOne(inversedBy: 'accommodations')]
     private ?Region $region = null;
 
+    #[ORM\ManyToMany(targetEntity: Reservation::class, inversedBy: "accommodation")]
+    private Collection $reservations;
+
+
     public function getId(): ?int
     {
         return $this->id;
@@ -125,8 +129,7 @@ class Accommodation
     {
         return $this->name;
     }
-    #[ORM\ManyToMany(targetEntity: Reservation::class, inversedBy: "accommodation")]
-    private Collection $reservations;
+
     public function addReservation(Reservation $reservation): self
     {
         if (!$this->reservations->contains($reservation)) {
@@ -140,7 +143,7 @@ class Accommodation
     public function removeReservation(Reservation $reservation): self
     {
         if ($this->reservations->removeElement($reservation)) {
-            $reservation->removeReservation($this);
+            $reservation->removeAccommodation($this);
         }
 
         return $this;

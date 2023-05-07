@@ -31,6 +31,9 @@ class Activity
     #[ORM\ManyToOne(inversedBy: 'activities')]
     private ?Region $Region = null;
 
+    #[ORM\ManyToMany(targetEntity: Reservation::class, inversedBy: "activity")]
+    private Collection $reservations;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -95,8 +98,7 @@ class Activity
 
         return $this;
     }
-    #[ORM\ManyToMany(targetEntity: Reservation::class, inversedBy: "activity")]
-    private Collection $reservations;
+
 
     public function __construct()
     {
