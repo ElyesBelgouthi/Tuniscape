@@ -15,4 +15,12 @@ class ReservationController extends AbstractController
             'controller_name' => 'ReservationController',
         ]);
     }
+
+    #[Route('/reservation/add', name: 'app_reservation_add')]
+    public function addReservation(): Response
+    {
+        return $this->render('reservation/index.html.twig', [
+            'controller_name' => 'ReservationController',
+        ]);
+    }
 }

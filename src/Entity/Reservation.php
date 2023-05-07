@@ -18,17 +18,17 @@ class Reservation
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(type: Types::DATE_MUTABLE)]
+    #[ORM\Column(type: Types::DATE_MUTABLE,nullable: true)]
     private ?\DateTimeInterface $startDate = null;
 
-    #[ORM\Column(type: Types::DATE_MUTABLE)]
+    #[ORM\Column(type: Types::DATE_MUTABLE,nullable: true)]
     private ?\DateTimeInterface $endDate = null;
     /**
      * @ORM\OneToMany(targetEntity=ReservationAccommodation::class, mappedBy="accommodation")
      */
     private Collection $reservations;
     #[ORM\Column(type: Types::SMALLINT)]
-    private ?int $status = null;
+    private ?int $status = 0;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $createdAt = null;
@@ -124,6 +124,7 @@ class Reservation
     {
         if (!$this->activity->contains($activity)) {
             $this->activity->add($activity);
+            $activity->addReservation($this);
         }
 
         return $this;
@@ -131,6 +132,7 @@ class Reservation
 
     public function removeActivity(Activity $activity): self
     {
+        $activity->removeReservation($this);
         $this->activity->removeElement($activity);
 
         return $this;
@@ -148,6 +150,7 @@ class Reservation
     {
         if (!$this->Accommodations->contains($accommodation)) {
             $this->Accommodations->add($accommodation);
+            $accommodation->addReservation($this);
         }
 
         return $this;
@@ -155,6 +158,7 @@ class Reservation
 
     public function removeAccommodation(Accommodation $accommodation): self
     {
+        $accommodation->removeReservation($this);
         $this->Accommodations->removeElement($accommodation);
 
         return $this;
@@ -171,6 +175,7 @@ class Reservation
     public function addFood(Food $food): self
     {
         if (!$this->foods->contains($food)) {
+            $food->addReservation($this);
             $this->foods->add($food);
         }
 
@@ -179,6 +184,7 @@ class Reservation
 
     public function removeFood(Food $food): self
     {
+        $food->removeReservation($this);
         $this->foods->removeElement($food);
 
         return $this;
