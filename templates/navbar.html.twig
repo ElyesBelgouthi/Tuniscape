@@ -12,11 +12,50 @@
                 <a href="#about" class="nav__link">About us</a>
             </li>
             {% if app.user %}
-                <li class="nav__item">
-                    <!--You are logged in as  -->
-                    <a href="{{ path('app_logout') }}">
-                        <button class="login--btn btn">LOG OUT</button>
-                    </a>
+                <li class="nav__item ">
+                    <div class="dropdown" id="dropdown">
+                        <button onclick="handleDropdownClicked()">
+                            <i class="fa-solid fa-circle-user" style="color: #ffc93c;"></i>
+                            <h3>{{ app.user.username() }}</h3>
+                        </button>
+                        <div id="menu" class="menu">
+                            <div id="menu-inner" class="menu-inner">
+                                <div class="main-menu">
+                                    <a href="{{ path('app_cart') }}">
+                                    <button>
+                                        <i class="fa-solid fa-briefcase" style="color: #ffc93c;"></i>
+                                        Cart
+                                    </button>
+                                    </a>
+                                    <a href="{{ path('app_logout') }}">
+                                         <button>
+                                        <i class="fa-solid fa-arrow-right-from-bracket" style="color: #ffc93c;"></i>
+                                        Logout
+                                         </button>
+                                    </a>
+                                    {% if app.user and is_granted('ROLE_ADMIN') %}
+                                    <a href="#">
+                                        <button>
+                                            <i class="fa-solid fa-clipboard" style="color: #ffc93c;"></i>
+                                            Admin Space
+                                        </button>
+                                    </a>
+                                    {% endif %}
+                                        <!-- other menu buttons -->
+                                </div>
+                                <div id="my-tools" class="sub-menu">
+                                        <button onclick="handleSubMenuClicked()">
+                                            <span> arrow_back </span>Tools
+                                        </button>
+
+                                    <!-- other menu buttons-->
+                                </div>
+
+                                    <!-- other sub menus -->
+                            </div>
+
+                        </div>
+                    </div>
                 </li>
             {% else %}
                 <li class="nav__item">
@@ -28,3 +67,6 @@
         </ul>
     </nav>
 </header>
+{% block javascripts %}
+    <script src="{{ asset('assets/js/Dropdown.js') }}"></script>
+{% endblock %}

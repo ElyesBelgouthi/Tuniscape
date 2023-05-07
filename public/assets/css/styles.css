@@ -11,7 +11,7 @@
     --fw-reg: 400;
     --fw-semi-reg: 600;
     --fw-bold: 900;
-
+    --menu-width: 230px;
     --clr-light: #fefefe;
     --clr-dark: #0081c9;
     --clr-accent: #ffc93c;
@@ -25,6 +25,7 @@
     --bs: 0.25em 0.25em 0.75em rgba(0, 0, 0, 0.25),
     0.125em 0.125em 0.25em rgba(0, 0, 0, 0.15);
 }
+
 
 @media (min-width: 800px) {
     :root {
@@ -50,6 +51,10 @@ body {
 
 section {
     padding: 5em 2em;
+}
+
+a, a:hover, a:focus {
+    text-decoration: none;
 }
 
 img {
@@ -170,10 +175,11 @@ header {
     list-style: none;
     height: 100%;
     flex-direction: row;
-    justify-content: space-between;
+    row-gap: 20px;
+    justify-content: space-around;
     align-items: center;
     width: 70vw;
-    max-width: 400px;
+    max-width: 600px;
     margin: 0;
     margin-left: 10px;
     padding: 0;
@@ -188,6 +194,11 @@ header {
 
 .nav__link:hover {
     color: var(--clr-accent);
+}
+
+.last_nav_item {
+    position: absolute;
+    right: 20px;
 }
 
 .login--btn {
@@ -691,4 +702,88 @@ marquee {
     .form-container {
         width: 100%;
     }
+}
+
+
+/* Dropdown button */
+
+.dropdown {
+    position: relative;
+    perspective: 200px;
+}
+
+.dropdown > button {
+    transition: 0.3s;
+}
+
+.dropdown.open > button {
+    background: rgba(0, 0, 0, 0.175);
+}
+
+.dropdown.open .menu {
+    opacity: 1;
+    transform: rotateX(0);
+    visibility: visible;
+}
+
+.dropdown button {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 16px;
+    width: 230px;
+    height: 72px;
+    color: #f9f9f9;
+    background: transparent;
+    border: 0;
+    cursor: pointer;
+    font-size: 16px;
+    font-family: var(--ff-primary);
+}
+
+.menu {
+    position: absolute;
+    overflow: hidden;
+    z-index: 1;
+    top: 72px;
+    left: 0;
+    width: 100%;
+    height: 168px;
+    opacity: 0;
+    transform-origin: 50% 0;
+    transform: rotateX(-90deg);
+    visibility: hidden;
+    background: var(--clr-dark);
+    transition: 0.4s;
+}
+
+.main-menu {
+    width: var(--menu-width);
+}
+
+.menu-inner {
+    position: absolute;
+    width: var(--menu-width);
+    display: flex;
+    transition: 0.3s;
+}
+
+
+.menu button {
+    border: 0;
+    width: 100%; height: 56px;
+    border-radius: 0;
+}
+
+.menu button:hover {
+    background: var(--clr-dark2);
+}
+
+.sub-menu {
+    display: none;
+    width: var(--menu-width);
+}
+
+.sub-menu.open {
+    display: block;
 }
