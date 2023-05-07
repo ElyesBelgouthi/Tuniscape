@@ -17,9 +17,9 @@ class ReservationService
     {
         $this->em = $em;
     }
-    public function findReservationByUserId(int $userId): ?Reservation
+    public function findReservationByUser(User $user): ?Reservation
     {
-        return $this->em->getRepository(Reservation::class)->findOneBy(['user' => $userId]);
+        return $this->em->getRepository(Reservation::class)->findOneBy(['User' => $user]);
     }
 
     public function addFoodToReservation(?Reservation $reservation, Food $food): Reservation
