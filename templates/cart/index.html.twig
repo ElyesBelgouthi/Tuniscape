@@ -4,17 +4,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>cart added</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.4.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+Knujsl7/1L_dstPt3HV5HzF6Gvk/e3E1wPGZF5_M8ydObm" crossorigin="anonymous">
-
+    <title>cart</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
-    <link rel="stylesheet" href="calender/cal.css" />
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
-    <link rel="stylesheet" href="{{ asset("assets/css/styles2.css") }}">
-    <link rel="stylesheet" href="{{ asset("assets/css/styles.css") }}">
-    <link rel="stylesheet" href="{{ asset("assets/css/style.css") }}">
+    <link rel="stylesheet" href="{{ asset('node_modules/@fortawesome/fontawesome-free/css/all.css') }}" />
+    <link rel="stylesheet" href="{{ asset('assets/css/styles2.css') }}" >
+    <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}" >
+    <link rel="stylesheet" href="{{ asset('assets/css/styles.css') }}" >
 </head>
+
 
 <body>
 {% include 'navbar.html.twig' %}
@@ -27,16 +29,25 @@
                 <strong>Cart</strong>
             </h1>
         </section>
-        <div class="category-block2">
-            <div class="text-container sectionTitle">
-                <p>Here is an overview of your reservation, you can edit it, choose a date and comfirm!</p>
+        <form action="{{ path('cart_approve') }}" method="POST">
+            <div class="category-block2">
+                <div class="text-container sectionTitle">
+                    <p>Here is an overview of your reservation, you can edit it, choose a date and confirm!</p>
+                </div>
+                <div id="flight-datepicker">
+                    <div>
+                        <label for="start-date">Depart on</label>
+                        <input class="input-sm form-control" type="date" id="start-date" name="start" placeholder="Select depart date" data-date-format="DD, MM d" value="{{ startDateValue }}" />
+                    </div>
+                    <div>
+                        <label for="end-date">Return on</label>
+                        <input class="input-sm form-control" type="date" id="end-date" name="end" placeholder="Select return date" data-date-format="DD, MM d" value="{{ endDateValue }}" />
+                        <span class="date-text date-return"></span>
+                    </div>
+                </div>
+                <button type="submit" class="login--btn btn largebtn">NEXT</button>
             </div>
-            <div id="flight-datepicker">
-                <div><label>Depart on</label><input class="input-sm form-control" type="date" id="start-date" name="start" placeholder="Select depart date" data-date-format="DD, MM d" /></div>
-                <div><label>Return on</label><input class="input-sm form-control" type="date" id="end-date" name="end" placeholder="Select return date" data-date-format="DD, MM d" /><span class="date-text date-return"></span></div>
-            </div>
-            <button class="login--btn btn largebtn">NEXT</button>
-        </div>
+        </form>
         <div class="category-block2">
             <div class="text-container">
                 <h3 class="section-title sectionTitle">You chose to stay :</h3>
@@ -47,10 +58,14 @@
 
                 {% for card in accommodationCards %}
                     <div class="card">
+
                         <img class="img-card" src="{{ asset('img/hotels/leRoyal.jpg'  ) }}" width="100%" height="100%" alt="Card image">
                         <div class="textBox">
                             <h3>{{ card.name }}</h3>
                             <p>{{ card.description }}</p>
+                            <a class="remove--btn" href="{{ path("cart_remove", {'id': card.id, 'type': 'accommodation'}) }}">
+                                <i class="fa-solid fa-circle-minus" style="color: #f41f1f;"></i>
+                            </a>
                             <button class="login--btn btn">More</button>
                         </div>
                     </div>
@@ -70,6 +85,9 @@
                         <div class="textBox">
                             <h3>{{ card.name }}</h3>
                             <p>{{ card.description }}</p>
+                            <a class="remove--btn" href="{{ path("cart_remove", {'id': card.id, 'type': 'activity'}) }}">
+                                <i class="fa-solid fa-circle-minus" style="color: #f41f1f;"></i>
+                            </a>
                             <button class="login--btn btn">More</button>
                         </div>
                     </div>
@@ -91,6 +109,9 @@
                         <div class="textBox">
                             <h3>{{ card.name }}</h3>
                             <p>{{ card.description }}</p>
+                            <a class="remove--btn" href="{{ path("cart_remove", {'id': card.id, 'type': 'food'}) }}">
+                                <i class="fa-solid fa-circle-minus" style="color: #f41f1f;"></i>
+                            </a>
                             <button class="login--btn btn">More</button>
                         </div>
                     </div>
@@ -107,7 +128,11 @@
 </footer>
 
 <!-- Add any necessary JavaScript here -->
-<script src="{{ asset('assets/js/Cart.js') }}"></script>
+
+{% block javascripts %}
+    <script src="{{ asset('assets/js/Cart.js') }}"></script>
+{% endblock %}
+
 </body>
 
 

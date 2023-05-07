@@ -57,6 +57,7 @@ class Reservation
         $this->activity = new ArrayCollection();
         $this->Accommodations = new ArrayCollection();
         $this->foods = new ArrayCollection();
+        $this->createdAt = new \DateTime("NOW");
     }
 
     public function getId(): ?int
@@ -132,9 +133,9 @@ class Reservation
 
     public function removeActivity(Activity $activity): self
     {
-        $activity->removeReservation($this);
-        $this->activity->removeElement($activity);
 
+        $this->activity->removeElement($activity);
+        $activity->removeReservation($this);
         return $this;
     }
 
@@ -158,9 +159,8 @@ class Reservation
 
     public function removeAccommodation(Accommodation $accommodation): self
     {
-        $accommodation->removeReservation($this);
         $this->Accommodations->removeElement($accommodation);
-
+        $accommodation->removeReservation($this);
         return $this;
     }
 
@@ -184,9 +184,8 @@ class Reservation
 
     public function removeFood(Food $food): self
     {
-        $food->removeReservation($this);
         $this->foods->removeElement($food);
-
+        $food->removeReservation($this);
         return $this;
     }
 
@@ -202,14 +201,6 @@ class Reservation
         return $this;
     }
 
-    /**
-     * @ORM\PrePersist()
-     */
-    public function onPrePersist(): void
-    {
-        $this->createdAt = new \DateTime();
-        $this->updatedAt = new \DateTime();
-    }
 
     /**
      * @ORM\PreUpdate()

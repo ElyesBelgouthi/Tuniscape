@@ -22,6 +22,9 @@ class Food
     #[ORM\Column(type: Types::TEXT)]
     private ?string $description = null;
 
+    #[ORM\ManyToMany(targetEntity: Reservation::class, inversedBy: "food")]
+    private Collection $reservations;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -50,8 +53,7 @@ class Food
 
         return $this;
     }
-    #[ORM\ManyToMany(targetEntity: Reservation::class, inversedBy: "food")]
-    private Collection $reservations;
+
 
     public function __construct()
     {
