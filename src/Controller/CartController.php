@@ -55,6 +55,12 @@ class CartController extends AbstractController
         $activities = $reservation->getActivity();
         $startDateValue = $reservation->getStartDate();
         $endDateValue = $reservation->getEndDate();
+        if($startDateValue === NULL){
+            $startDateValue = new \DateTime("NOW");
+        }
+        if($endDateValue === NULL){
+            $endDateValue = new \DateTime("NOW");
+        }
         foreach ($foods as $food) {
             $userFoods[] = $food;
         }
