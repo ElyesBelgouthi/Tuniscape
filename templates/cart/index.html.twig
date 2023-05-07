@@ -66,7 +66,7 @@
                             <a class="remove--btn" href="{{ path("cart_remove", {'id': card.id, 'type': 'accommodation'}) }}">
                                 <i class="fa-solid fa-circle-minus" style="color: #f41f1f;"></i>
                             </a>
-                            <button class="login--btn btn">More</button>
+                            <a href="{{ path('app_details', {'id': card.id, 'type': 'accommodation'}) }}" class="login--btn btn">More</a>
                         </div>
                     </div>
                 {% endfor %}
@@ -88,7 +88,7 @@
                             <a class="remove--btn" href="{{ path("cart_remove", {'id': card.id, 'type': 'activity'}) }}">
                                 <i class="fa-solid fa-circle-minus" style="color: #f41f1f;"></i>
                             </a>
-                            <button class="login--btn btn">More</button>
+                            <a href="{{ path('app_details', {'id': card.id, 'type': 'activity'}) }}" class="login--btn btn">More</a>
                         </div>
                     </div>
                 {% endfor %}
@@ -112,7 +112,7 @@
                             <a class="remove--btn" href="{{ path("cart_remove", {'id': card.id, 'type': 'food'}) }}">
                                 <i class="fa-solid fa-circle-minus" style="color: #f41f1f;"></i>
                             </a>
-                            <button class="login--btn btn">More</button>
+                            <a href="{{ path('app_details', {'id': card.id, 'type': 'food'}) }}" class="login--btn btn">More</a>
                         </div>
                     </div>
                 {% endfor %}

@@ -68,7 +68,7 @@
                             <div class="textBox">
                                 <h3>{{ card.name }}</h3>
                                 <p>{{ card.description }}</p>
-                                <a href="{{ path('accommodation_show', {'id': card.id}) }}" class="login--btn btn">More</a>
+                                <a href="{{ path('app_details', {'id': card.id, 'type': 'accommodation'}) }}" class="login--btn btn">More</a>
                                 <a id="{{ card.id }}" class="login--btn btn add-btn" href="{{ path("cart_add", {'id': card.id, 'type': 'accommodation'}) }}">Add</a>
                             </div>
                         </div>
@@ -94,7 +94,7 @@
                             <div class="textBox">
                                 <h3>{{ card.name }}</h3>
                                 <p>{{ card.description }}</p>
-                                <a href="{{ path('food_show', {'id': card.id}) }}" class="login--btn btn">More</a>
+                                <a href="{{ path('app_details', {'id': card.id, 'type': 'food'}) }}" class="login--btn btn">More</a>
                                 <a class="login--btn btn add-btn" href="{{ path("cart_add", {'id': card.id, 'type': 'food'}) }}">Add</a>
                             </div>
                         </div>
@@ -119,7 +119,7 @@
                             <div class="textBox">
                                 <h3>{{ card.name }}</h3>
                                 <p>{{ card.description }}</p>
-                                <a href="{{ path('activity_show', {'id': card.id}) }}" class="login--btn btn">More</a>
+                                <a href="{{ path('app_details', {'id': card.id, 'type': 'activity'}) }}" class="login--btn btn">More</a>
                                 <a class="login--btn btn add-btn" href="{{ path("cart_add", {'id': card.id, 'type': 'activity'}) }}">Add</a>
                             </div>
                         </div>
