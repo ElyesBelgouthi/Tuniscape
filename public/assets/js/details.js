@@ -1,3 +1,4 @@
+
 const h1 = document.querySelector(".banner--title");
 const banner = document.querySelector("#banner");
 const button = document.querySelector(".learn--more");
@@ -32,15 +33,13 @@ const expand = (item, i) => {
     });
     gsap.to(items, {
         width: item.clicked ? "15vw" : "8vw",
-        duration: 2,
-        ease: "elastic(1, .6)",
+        duration: 0.45
     });
 
     item.clicked = !item.clicked;
     gsap.to(item, {
         width: item.clicked ? "42vw" : "15vw",
-        duration: 2.5,
-        ease: "elastic(1, .3)",
+        duration: 0.45
     });
 };
 

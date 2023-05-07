@@ -40,11 +40,12 @@ html {
 }
 
 body {
-    background-color:#B0413E ;
-    background-image: url(../img/bgimg.jpg);
+    background-color:var(--clr-dark) ;
+    background-image: url("../img/bgimg.jpg");
+    background-repeat: no-repeat;
     background-size: cover;
-    background-position: center;
-    /* background-repeat: no-repeat; */
+    max-height: 100vh;
+    max-width: 100vw;
     height: 100vh;
     color: var(--clr-dark);
     margin: 0;
@@ -81,6 +82,7 @@ strong {
 
 .login--page {
     display: block;
+
     width: 100%;
     height: 100%;
     padding: 0 calc(50% - 500px);
@@ -251,7 +253,7 @@ select:focus {
     right: 0;
     width: 2px;
     height: 100%;
-    background: linear-gradient(180deg, transparent);
+    background: linear-gradient(180deg, transparent, var(--clr-accent));
     animation: btn-anim2 1.5s linear infinite;
     animation-delay: 0.375s;
 }
@@ -413,4 +415,53 @@ a.a2:hover {
 
 input::-webkit {
     text-decoration: none;
+}
+
+/* calendars */
+#reservation-datepicker {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+#reservation-datepicker > div > label {
+    font-size: var(--fs-h3);
+    font-weight: var(--fw-semi-reg);
+}
+
+.btn--next {
+    margin: 30px auto 0;
+}
+
+.category-block2 > form {
+    width: 100%;
+}
+
+.reservation--date {
+    display: block;
+    width: 250px;
+    height: 50px;
+    padding: 10px;
+    font-size: 18px;
+    line-height: 1.5;
+    color: var(--clr-dark);
+    background-color: var(--clr-accent);
+    border: 1px solid var(--clr-dark);
+    border-radius: 5px;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
+    transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+}
+
+.reservation--date:focus {
+    outline: none;
+    border-color: #66afe9;
+    box-shadow: 0 0 8px rgba(102, 175, 233, 0.6);
+}
+
+::-webkit-calendar-picker-indicator {
+    margin-left: 5px;
+    filter: invert(0.5);
+}
+
+::-webkit-inner-spin-button {
+    display: none;
 }
