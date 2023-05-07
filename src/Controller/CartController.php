@@ -53,7 +53,8 @@ class CartController extends AbstractController
         $foods = $reservation->getFoods();
         $accommodations = $reservation->getAccommodations();
         $activities = $reservation->getActivity();
-
+        $startDateValue = $reservation->getStartDate();
+        $endDateValue = $reservation->getEndDate();
         foreach ($foods as $food) {
             $userFoods[] = $food;
         }
@@ -66,12 +67,12 @@ class CartController extends AbstractController
             $userActivities[] = $activity;
         }
 
-
-
         return $this->render('cart/index.html.twig', [
             'foodCards' => $userFoods,
             'accommodationCards' => $userAccommodations,
             'activityCards' => $userActivities,
+            'startDateValue' => $startDateValue->format('Y-m-d'),
+            'endDateValue' => $endDateValue->format('Y-m-d')
         ]);
     }
 
@@ -198,4 +199,37 @@ class CartController extends AbstractController
         return $this->redirectToRoute("app_cart");
     }
 
+    #[Route('/cart/approve', name: 'cart_approve')]
+    public function changeDate(
+        Request $request,
+        EntityManagerInterface $em,
+        UserRepository $userRepository,
+        ReservationService $reservationService,
+        LoggerInterface $logger
+    ): Response {
+        $user = $this->getUser();
+        if ($user === null) {
+            // handle the case when the user is not logged in, e.g., redirect to the login page
+            return $this->redirectToRoute('app_login');
+        }
+        $userId = $user->getId();
+        $User2 = $userRepository->find($userId);
+        // Find the existing reservation by user ID, if any
+        $reservation = null;
+        if ($userId) {
+            $reservation = $reservationService->findReservationByUser($User2);
+        }
+        if($reservation->getStartDate()!== null){
+        }
+        //dd($request);
+        $startDateValue = $request->request->get("start");
+        $endDateValue = $request->request->get("end");
+        $reservation->setStartDate(new \DateTime($startDateValue));
+        $reservation->setEndDate(new \DateTime($endDateValue));
+        //dd($reservation);
+        $em->persist($reservation);
+        $em->flush();
+
+        return $this->redirectToRoute("app_cart");
+    }
 }

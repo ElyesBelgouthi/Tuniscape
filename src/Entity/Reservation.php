@@ -57,6 +57,7 @@ class Reservation
         $this->activity = new ArrayCollection();
         $this->Accommodations = new ArrayCollection();
         $this->foods = new ArrayCollection();
+        $this->createdAt = new \DateTime("NOW");
     }
 
     public function getId(): ?int
@@ -200,14 +201,6 @@ class Reservation
         return $this;
     }
 
-    /**
-     * @ORM\PrePersist()
-     */
-    public function onPrePersist(): void
-    {
-        $this->createdAt = new \DateTime();
-        $this->updatedAt = new \DateTime();
-    }
 
     /**
      * @ORM\PreUpdate()

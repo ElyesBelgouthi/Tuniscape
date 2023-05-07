@@ -29,16 +29,25 @@
                 <strong>Cart</strong>
             </h1>
         </section>
-        <div class="category-block2">
-            <div class="text-container sectionTitle">
-                <p>Here is an overview of your reservation, you can edit it, choose a date and comfirm!</p>
+        <form action="{{ path('cart_approve') }}" method="POST">
+            <div class="category-block2">
+                <div class="text-container sectionTitle">
+                    <p>Here is an overview of your reservation, you can edit it, choose a date and confirm!</p>
+                </div>
+                <div id="flight-datepicker">
+                    <div>
+                        <label for="start-date">Depart on</label>
+                        <input class="input-sm form-control" type="date" id="start-date" name="start" placeholder="Select depart date" data-date-format="DD, MM d" value="{{ startDateValue }}" />
+                    </div>
+                    <div>
+                        <label for="end-date">Return on</label>
+                        <input class="input-sm form-control" type="date" id="end-date" name="end" placeholder="Select return date" data-date-format="DD, MM d" value="{{ endDateValue }}" />
+                        <span class="date-text date-return"></span>
+                    </div>
+                </div>
+                <button type="submit" class="login--btn btn largebtn">NEXT</button>
             </div>
-            <div id="flight-datepicker">
-                <div><label>Depart on</label><input class="input-sm form-control" type="date" id="start-date" name="start" placeholder="Select depart date" data-date-format="DD, MM d" /></div>
-                <div><label>Return on</label><input class="input-sm form-control" type="date" id="end-date" name="end" placeholder="Select return date" data-date-format="DD, MM d" /><span class="date-text date-return"></span></div>
-            </div>
-            <button class="login--btn btn largebtn">NEXT</button>
-        </div>
+        </form>
         <div class="category-block2">
             <div class="text-container">
                 <h3 class="section-title sectionTitle">You chose to stay :</h3>
