@@ -22,37 +22,29 @@
 
     <body>
     {% include "navbar.html.twig" %}
-    <main>
-        <div class="bg">
 
-            <section id="cart">
+            <section class="intro">
                 <h1 class="section__title section__title--intro animate__animated animate__fadeInLeft">
                     <strong>TUNISIA</strong>
                 </h1>
-            </section>
-            <div class="category-block2">
-                <div class="text-container sectionTitle">
-                    <p>Your Passport to Tunisia's Rich Culture and Cuisine: Explore Accommodation and Dining on
+                    <p class="section__subtitle section__subtitle--intro">Your Passport to Tunisia's Rich Culture and Cuisine:</p>
+                    <p class="section__subtitle section__subtitle--intro"> Explore Accommodation and Dining on
                         Tuniscape.</p>
-                </div>
-                <div><a class="explore--btn btn animate__animated animate__fadeInUp exploreButton2 " href="#to-live">
+                <div class="flex">
+                    <a class="explore--btn btn animate__animated animate__fadeInUp exploreButton2" href="#to-live">
                         where to live
-
                     </a>
                     <a class="explore--btn btn animate__animated animate__fadeInUp exploreButton2" href="#to-visit">
-                        visit
+                        what to visit
                     </a>
 
                     <a class="explore--btn btn animate__animated animate__fadeInUp exploreButton2" href="#to-eat">
-                        eat
+                        what to eat
                     </a>
                 </div>
-
-
-
-
-            </div>
+            </section>
             <!-- loula -->
+    <section class="explore--content">
             <div class="category-block" id="to-live">
                 <div class="see-more"><h3 class="section-title sectionTitle">What to eat?</h3>
                     <a id="fold" href="live-catalog.html">
@@ -129,15 +121,9 @@
                     <button class="scroll-button right-button">&gt;</button>
                 </div>
             </div>
+    </section>
 
-
-
-        </div>
-    </main>
-
-    <footer>
-
-    </footer>
+    {% include'footer.html.twig' %}
 
     <script src="cart.js"></script>
     {% block javascripts %}

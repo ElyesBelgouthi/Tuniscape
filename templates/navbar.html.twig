@@ -15,8 +15,8 @@
                 <li class="nav__item ">
                     <div class="dropdown" id="dropdown">
                         <button onclick="handleDropdownClicked()">
-                            <i class="fa-solid fa-circle-user" style="color: #ffc93c;"></i>
-                            <h3>{{ app.user.username() }}</h3>
+                            <i class="fa-solid fa-circle-user" style="color: #ffc93c; font-size: 20px;"></i>
+                            <h3 style="font-size: 20px">{{ app.user.username() }}</h3>
                         </button>
                         <div id="menu" class="menu">
                             <div id="menu-inner" class="menu-inner">
@@ -27,7 +27,7 @@
                                         Cart
                                     </button>
                                     </a>
-                                    <a href="{{ path('app_logout') }}">1
+                                    <a href="{{ path('app_logout') }}">
                                          <button>
                                         <i class="fa-solid fa-arrow-right-from-bracket" style="color: #ffc93c;"></i>
                                         Logout

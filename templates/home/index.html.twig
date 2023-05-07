@@ -30,7 +30,7 @@
         A land of white sands and ancient stories
     </p>
     <a href="{{ path('app_explore') }}">
-    <button class="explore--btn btn animate__animated animate__fadeInUp">
+    <button class="explore--btn exploreButton animate__animated animate__fadeInUp">
         Explore Now
     </button>
     </a>
@@ -133,84 +133,7 @@
     skies and 80°F in Miami, FL
 </marquee>
 
-<footer class="footer">
-    <!--Content before waves-->
-    <div class="inner-footer">
-        <h1>Start Your Journey!</h1>
-        <svg
-                class="tunisia--flag"
-                width="300"
-                height="200"
-                viewBox="-60 -40 120 80"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="rgba(255,255,255,0)"
-        >
-            <path d="M-60-40H60v80H-60z" />
-            <circle fill="#e70013" r="30" />
-            <circle fill="#fff" r="20" />
-            <circle fill="#e70013" r="15" />
-            <circle fill="#fff" cx="4" r="12" />
-            <path
-                    d="M-5 0l16.281-5.29L1.22 8.56V-8.56L11.28 5.29z"
-                    fill="#e70013"
-            />
-        </svg>
-    </div>
-
-    <!--Waves Container-->
-    <div>
-        <svg
-                class="waves"
-                xmlns="http://www.w3.org/2000/svg"
-                xmlns:xlink="http://www.w3.org/1999/xlink"
-                viewBox="0 24 150 28"
-                preserveAspectRatio="none"
-                shape-rendering="auto"
-        >
-            <defs>
-                <path
-                        id="gentle-wave"
-                        d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z"
-                />
-            </defs>
-            <g class="wave--animation">
-                <use
-                        xlink:href="#gentle-wave"
-                        x="48"
-                        y="0"
-                        fill="rgba(255,255,255,0.7"
-                />
-                <use
-                        xlink:href="#gentle-wave"
-                        x="48"
-                        y="3"
-                        fill="rgba(255,255,255,0.5)"
-                />
-                <use
-                        xlink:href="#gentle-wave"
-                        x="48"
-                        y="5"
-                        fill="rgba(255,255,255,0.3)"
-                />
-                <use xlink:href="#gentle-wave" x="48" y="7" fill="#fff" />
-            </g>
-        </svg>
-    </div>
-    <div class="footer--content">
-        <p>Made By &nbsp;</p>
-        <p>
-            <span>Amine Affi</span>
-            <span class="separator"></span>
-            <span>Elyes Belgouthi</span>
-            <span class="separator"></span>
-            <span>Adem Laadhari</span>
-            <span class="separator"></span>
-            <span>Omar Maalej</span>
-            <span class="separator"></span>
-            <span>Ahmed Karray</span>
-        </p>
-    </div>
-</footer>
+{% include "footer.html.twig" %}
 <a href="#home" class="comeback--btn--anchor"
 ><button class="explore--btn comeback--btn">
         <i class="fa-solid fa-arrow-up"></i></button
