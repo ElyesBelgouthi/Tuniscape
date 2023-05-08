@@ -793,3 +793,79 @@ marquee {
 .sub-menu.open {
     display: block;
 }
+.authentic-experiences {
+    background-color: #f9f9f9;
+    padding: 80px 0;
+    text-align: center;
+}
+
+.experiences {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 30px;
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+
+.experience__item {
+    position: relative;
+    width: 30%;
+    overflow: hidden;
+}
+
+.experience__img {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: transform 0.3s ease;
+}
+
+.experience__overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.6);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.experience__overlay-content {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    transform: translateY(-50%);
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+}
+
+.experience__title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.experience__description {
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+.authentic-experiences__btn {
+    background-color: #e76f51;
+    color: #fff;
+    padding: 12px 30px;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.authentic-experiences__btn:hover {
+    background-color: #e15c3d;
+}
+
+
