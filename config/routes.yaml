@@ -15,3 +15,7 @@ food_show:
 activity_show:
     path: /activity/{id}
     controller: App\Controller\ActivityController
+
+homepage:
+    path: /
+    controller: App\Controller\HomeController::index
