@@ -127,7 +127,7 @@
 </section>
 
 <!-- weather -->
-<marquee behavior="scroll" direction="left" scrollamount="10">
+<marquee id="marquee" behavior="scroll" direction="left" scrollamount="10">
     Live Weather Update: Sunny skies and 70°F in Los Angeles, CA | Partly
     cloudy and 60°F in New York, NY | Rainy and 55°F in Seattle, WA | Clear
     skies and 80°F in Miami, FL
@@ -139,6 +139,6 @@
         <i class="fa-solid fa-arrow-up"></i></button
     ></a>
 <!--Content ends-->
-
+<script async defer src="{{ asset('assets/js/Weather.js') }}"></script>
 </body>
 </html>
