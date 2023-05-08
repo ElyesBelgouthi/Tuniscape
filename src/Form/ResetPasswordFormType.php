@@ -17,9 +17,6 @@ class ResetPasswordFormType extends AbstractType
                 'type' => PasswordType::class,
                 'first_options' => ['label' => 'New Password'],
                 'second_options' => ['label' => 'Confirm Password'],
-            ])
-            ->add('submit', SubmitType::class, [
-                'label' => 'Reset Password',
             ]);
     }
 

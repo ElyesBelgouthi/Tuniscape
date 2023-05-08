@@ -14,13 +14,6 @@ class ForgotPasswordFormType extends AbstractType
         $builder
             ->add('email', EmailType::class, [
                 'label' => 'Email Address',
-            ])
-            ->add('submit', SubmitType::class, [
-                'label' => 'Recover',
-                'attr' => [
-                    'class' => 'login--btn',
-                    'onclick' => 'submitForm()',
-                ]
             ]);
 
     }

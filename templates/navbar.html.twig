@@ -28,12 +28,7 @@
                                         Cart
                                     </button>
                                     </a>
-                                    <a href="{{ path('app_logout') }}">
-                                         <button>
-                                        <i class="fa-solid fa-arrow-right-from-bracket" style="color: #ffc93c;"></i>
-                                        Logout
-                                         </button>
-                                    </a>
+
                                     {% if app.user and is_granted('ROLE_ADMIN') %}
                                     <a href="#">
                                         <button>
@@ -41,7 +36,20 @@
                                             Admin Space
                                         </button>
                                     </a>
+                                    {% else %}
+                                        <a href="{{ path('app_user_edit') }}">
+                                            <button>
+                                                <i class="fa-solid fa-address-card" style="color: #ffc93c;"></i>
+                                                Profile
+                                            </button>
+                                        </a>
                                     {% endif %}
+                                    <a href="{{ path('app_logout') }}">
+                                        <button>
+                                            <i class="fa-solid fa-arrow-right-from-bracket" style="color: #ffc93c;"></i>
+                                            Logout
+                                        </button>
+                                    </a>
                                         <!-- other menu buttons -->
                                 </div>
                                 <!--<div id="my-tools" class="sub-menu">
