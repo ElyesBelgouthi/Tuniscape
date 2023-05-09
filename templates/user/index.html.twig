@@ -1,57 +1,83 @@
-{% extends 'base.html.twig' %}
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+            href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;800;900&display=swap"
+            rel="stylesheet"
+    />
+    <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+    />
+    <link rel="stylesheet" href="{{ asset('node_modules/@fortawesome/fontawesome-free/css/all.css')  }}" >
+    <link rel="stylesheet" href="{{ asset("assets/css/styles.css") }}" />
+    <link rel="stylesheet" href="{{ asset("assets/css/styles2.css") }}" />
+    <title>Tuniscape</title>
 
-{% block title %}User index{% endblock %}
+<body>
+{% include 'navbar.html.twig' %}
+<section class="login--page">
+    <div class="login--container">
+        <div class="login--img">
+            <img src="{{ asset("assets/img/sign3.jpg") }}" alt="" />
+        </div>
+        <div class="form-container">
+            <p class="title">Edit Profile</p>
+            <div class="login-box">
+                {{ form_start(userForm, {'attr': {'id': 'registration-form'}}) }}
+                <div class="user-box full-box">
+                    <div class="user-box full-box">
+                        {{ form_widget(userForm.username, {'required': true}) }}
+                        <label>Username</label>
+                    </div>
+                    <div class="flex-box">
+                        <div class="user-box half-box">
+                            {{ form_widget(userForm.firstName, {'required': true}) }}
 
-{% block body %}
-    <h1>User index</h1>
+                            <label>First Name</label>
+                        </div>
+                        <div class="user-box half-box">
+                            {{ form_widget(userForm.lastName, {'required': true}) }}
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Username</th>
-                <th>Roles</th>
-                <th>Password</th>
-                <th>FirstName</th>
-                <th>LastName</th>
-                <th>Email</th>
-                <th>Age</th>
-                <th>Nationality</th>
-                <th>CreatedAt</th>
-                <th>UpdatedAt</th>
-                <th>IsVerified</th>
-                <th>VerficationCode</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for user in users %}
-            <tr>
-                <td>{{ user.id }}</td>
-                <td>{{ user.username }}</td>
-                <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
-                <td>{{ user.password }}</td>
-                <td>{{ user.firstName }}</td>
-                <td>{{ user.lastName }}</td>
-                <td>{{ user.email }}</td>
-                <td>{{ user.age }}</td>
-                <td>{{ user.nationality }}</td>
-                <td>{{ user.createdAt ? user.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ user.updatedAt ? user.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ user.isVerified ? 'Yes' : 'No' }}</td>
-                <td>{{ user.verficationCode }}</td>
-                <td>
-                    <a href="{{ path('app_user_show', {'id': user.id}) }}">show</a>
-                    <a href="{{ path('app_user_edit', {'id': user.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="14">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+                            <label>Last Name</label>
+                        </div>
+                    </div>
+                    <div class="flex-box">
+                        <div class="user-box half-box">
+                            {{ form_widget(userForm.age, {'required': true}) }}
 
-    <a href="{{ path('app_user_new') }}">Create new</a>
-{% endblock %}
+                            <label>Age</label>
+                        </div>
+                        <div class="user-box half-box">
+                            {{ form_widget(userForm.nationality, {'required': true}) }}
+
+                            <label>Nationality</label>
+                        </div>
+                    </div>
+
+                    <a href="#" id="submit-form">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        Save
+                    </a>
+                    {{ form_end(userForm) }}
+
+                </div>
+                <p>
+                    Do you want to change password ?
+                    <a href="{{ path('app_forgot_password') }}" class="a2">change password</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+<script src="{{ asset("assets/js/register.js") }}"></script>
+</body>
+</html>

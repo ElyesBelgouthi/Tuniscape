@@ -7,7 +7,6 @@
   padding: 1rem 0;
   gap: 20px;
   overflow-x: hidden;
-  padding: 1rem 0;
   flex-wrap: nowrap;
 }
 
@@ -32,9 +31,9 @@
 }
 
 .sectionTitle {
-  color: #ffffff;
+  color: var(--clr-dark);
   font-size: 2rem;
-  font-weight: 600;
+  font-weight: 800;
   font-family: var(--ff-primary);
   margin-bottom: 1rem;
 }
@@ -44,7 +43,7 @@
   padding: 2rem;
   font-family: var(--ff-primary);
   margin: 4rem auto;
-  max-width: 63%;
+  max-width: 80%;
 
   background: var(--clr-accent);
   box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
@@ -61,16 +60,20 @@
 
 }
 
+.card__title {
+  height: 80px;
+}
+
 .category-block2 {
   padding: 2rem;
   margin-bottom: 2rem;
   max-width: 90%;
   margin-left: auto;
   margin-right: auto;
-  background: rgba( 255, 255, 255, 0.35 );
+  background: rgba( 255, 255, 255, 0.65 );
   box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
-  backdrop-filter: blur( 13.5px );
-  -webkit-backdrop-filter: blur( 13.5px );
+  backdrop-filter: blur( 10.5px );
+  -webkit-backdrop-filter: blur( 10.5px );
   border-radius: 10px;
   border: 1px solid rgba( 255, 255, 255, 0.18 );
   display: flex;
@@ -86,14 +89,14 @@
   bottom: 0%;
   height: 120px;
   width: 35px;
-  background: black;
+  background: var(--clr-dark);
   color: white;
   border: none;
   outline: none;
-  font-size: 24px;
   opacity: 0;
   border-radius: 6px;
   transition: opacity 0.3s ease-in-out;
+  font-size: 10px;
 }
 
 .scroll-button:hover {
@@ -247,12 +250,6 @@
   opacity: 1;
 }
 
-/*.bg {
-  background-image: url("../img/blurbkg.jpg");
-  background-repeat: no-repeat;
-  background-size: cover;
-}*/
-
 .largebtn {
   width: 30%;
   height: 300%;
@@ -323,5 +320,7 @@ label[for="location"] {
   font-size: 14px;
   font-weight: 400;
 }
-
-
+.see-more{
+  display: flex;
+  justify-content: space-between;
+}

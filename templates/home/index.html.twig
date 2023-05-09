@@ -35,6 +35,55 @@
     </button>
     </a>
 </section>
+<section class="authentic-experiences" id="authentic-experiences">
+    <h2 class="section--title">Customized Holidays and Authentic Tunisian Experiences</h2>
+    <p class="section__subtitle--authentic-experiences">
+        Discover Tunisia through unique, tailored experiences that showcase the best of its culture, history, and natural beauty.
+    </p>
+    <div class="experiences">
+        <div class="experience__item">
+            <img src="{{ asset('assets/img/parallax1.jpg') }}" alt="Experience 1" class="experience__img" />
+            <div class="experience__text">
+            <h3 class="experience__title">
+                <i class="fa-solid fa-people-group display_block"></i>
+                Cultural Immersion
+            </h3>
+            <p class="experience__description">
+                Experience the rich history and vibrant culture of Tunisia as you explore ancient ruins, dine on traditional cuisine, and engage with local artisans.
+            </p>
+            </div>
+        </div>
+        <div class="experience__item">
+            <img src="{{ asset('assets/img/hotels/leRoyal.jpg') }}" alt="Experience 2" class="experience__img" />
+            <div class="experience__text">
+            <h3 class="experience__title">
+                <i class="fa-solid fa-compass display_block"></i>
+                Adventure Travel
+            </h3>
+            <p class="experience__description">
+                Dive into adventure as you trek through the Sahara Desert, explore mysterious caves, or embark on a thrilling off-road journey across the diverse landscapes of Tunisia.
+            </p>
+            </div>
+        </div>
+        <div class="experience__item">
+            <img src="{{ asset('assets/img/dougga-tunisia.jpg') }}" alt="Experience 3" class="experience__img" />
+            <div class="experience__text">
+            <h3 class="experience__title">
+                <i class="fa-solid fa-gem display_block"></i>
+                Luxury Retreats
+            </h3>
+            <p class="experience__description">
+                Indulge in a world of luxury as you unwind at exclusive resorts, rejuvenate in serene spas, and savor exquisite gourmet experiences in Tunisia's most idyllic settings.
+            </p>
+            </div>
+        </div>
+    </div>
+    <a href="{{ path('app_explore') }}">
+        <button class="explore--btn exploreButton animate__animated animate__fadeInUp">
+            DIVE IN
+        </button>
+    </a>
+</section>
 <!-- Parallax-->
 <section class="parallax--container">
     <div class="title">
@@ -127,7 +176,7 @@
 </section>
 
 <!-- weather -->
-<marquee behavior="scroll" direction="left" scrollamount="10">
+<marquee id="marquee" behavior="scroll" direction="left" scrollamount="10">
     Live Weather Update: Sunny skies and 70°F in Los Angeles, CA | Partly
     cloudy and 60°F in New York, NY | Rainy and 55°F in Seattle, WA | Clear
     skies and 80°F in Miami, FL
@@ -139,6 +188,6 @@
         <i class="fa-solid fa-arrow-up"></i></button
     ></a>
 <!--Content ends-->
-
+<script async defer src="{{ asset('assets/js/Weather.js') }}"></script>
 </body>
 </html>

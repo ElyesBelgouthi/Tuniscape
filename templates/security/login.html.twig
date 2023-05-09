@@ -18,10 +18,14 @@
     <title>Tuniscape</title>
 </head>
 <body>
+{% if error %}
+<div class="popup">
+    <h3>{{ error.messageKey|trans(error.messageData, 'security') }}</h3>
+    <button class="popup--btn explore--btn">OK</button>
+</div>
+{% endif %}
 <section class="login--page">
-    {% if error %}
-        <div class="alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-    {% endif %}
+
     <div class="login--container" >
 
         <div class="login--img">
@@ -50,6 +54,10 @@
                         Submit
                     </a>
                 </form>
+                <p>
+                    Forgot your password?
+                    <a href="{{ path('app_forgot_password') }}" class="a2">Reset password!</a>
+                </p>
                 <p>
                     Don't have an account?
                     <a href="{{ path('app_register') }}" class="a2">Sign up!</a>

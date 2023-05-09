@@ -18,6 +18,8 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\UserAuthenticatorInterface;
 use Symfony\Component\Mailer\MailerInterface;
+use App\Form\ForgotPasswordFormType;
+use App\Form\ResetPasswordFormType;
 
 
 class RegistrationController extends AbstractController
@@ -108,6 +110,98 @@ class RegistrationController extends AbstractController
 
             return $this->redirectToRoute('app_register');
         }
+    }
+    #[Route('/forgot-password', name: 'app_forgot_password')]
+    public function forgotPassword(
+        Request $request,
+        EntityManagerInterface $entityManager,
+
+    ): Response {
+
+        $form = $this->createForm(ForgotPasswordFormType::class);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $email = $form->get('email')->getData();
+            $user = $entityManager->getRepository(User::class)->findOneBy(['email' => $email]);
+
+            if ($user) {
+                // Generate a verification code
+                $verificationCode = random_int(100000, 999999);
+                $user->setVerficationCode($verificationCode);
+
+                $entityManager->flush();
+
+                // Send the password reset email
+                $email = (new Email())
+                    ->from(new Address('tuniscape@gmail.com', 'Tuniscape'))
+                    ->to($user->getEmail())
+                    ->subject('Password Reset Request')
+                    ->html("
+                    <h1>Hi! You requested a password reset.</h1>
+                    <p>
+                        To reset your password, click the following link: <br><br>
+                        <a href=\"https://localhost:8000/reset-password/{$verificationCode}\">Reset my Password</a>.
+                    </p>
+                    <p>
+                        If you didn't request a password reset, please ignore this email.
+                    </p>
+                ");
+                $dsn = 'smtp://tuniscape%40gmail.com:aezaetrfsezujwpt@smtp.gmail.com:587';
+                $transport = Transport::fromDsn($dsn);
+                $mailer = new Mailer($transport);
+                $mailer->send($email);
+
+                $this->addFlash('success', 'A password reset link has been sent to your email.');
+            } else {
+                $this->addFlash('error', 'No user found with this email address.');
+            }
+
+            return $this->redirectToRoute('app_login');
+        }
+
+        return $this->render('registration/forgot_password.html.twig', [
+            'forgotPasswordForm' => $form->createView(),
+        ]);
+    }
+    #[Route('/reset-password/{code}', name: 'app_reset_password')]
+    public function resetPassword(
+        string $code,
+        Request $request,
+        EntityManagerInterface $entityManager,
+        UserPasswordHasherInterface $userPasswordHasher
+    ): Response {
+        $user = $entityManager->getRepository(User::class)->findOneBy(['verficationCode' => $code]);
+
+        if ($user) {
+            $form = $this->createForm(ResetPasswordFormType::class);
+            $form->handleRequest($request);
+
+            if ($form->isSubmitted() && $form->isValid()) {
+                // Update the user's password
+                $user->setPassword(
+                    $userPasswordHasher->hashPassword(
+                        $user,
+                        $form->get('plainPassword')->getData()
+                    )
+                );
+
+                // Clear the verification code
+                $user->setVerficationCode(null);
+
+                $entityManager->flush();
+
+                $this->addFlash('success', 'Your password has been reset.');
+
+                return $this->redirectToRoute('app_login');
+            }
+        } else {
+            $this->addFlash('error', 'Invalid verification code.');
+
+            return $this->redirectToRoute('app_forgot_password');
+        }
+        return $this->render('registration/reset_password.html.twig', [
+            'resetPasswordForm' => $form->createView()
+        ]);
     }
 }
 

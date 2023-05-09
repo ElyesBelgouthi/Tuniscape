@@ -71,24 +71,29 @@ class ReservationService
         int $status,
         ?Reservation $reservation = null
     ): Reservation {
-        if (!$reservation) {
-            $reservation = new Reservation();
-            $user = $this->em->getRepository(User::class)->find($userId);
-            if (!$user) {
-                throw new \Exception('User not found');
+        try {
+            if (!$reservation) {
+                $reservation = new Reservation();
+                $user = $this->em->getRepository(User::class)->find($userId);
+                if (!$user) {
+                    throw new \Exception('User not found');
+                }
+
+                $reservation->setUser($user);
             }
 
-            $reservation->setUser($user);
+            $reservation->setStartDate($startDate);
+            $reservation->setEndDate($endDate);
+            $reservation->setStatus($status);
+
+            $this->em->persist($reservation);
+            $this->em->flush();
+
+            return $reservation;
+        } catch (\Exception $e) {
+            throw $e;
         }
-
-        $reservation->setStartDate($startDate);
-        $reservation->setEndDate($endDate);
-        $reservation->setStatus($status);
-
-        $this->em->persist($reservation);
-        $this->em->flush();
-
-        return $reservation;
     }
+
 
 }
