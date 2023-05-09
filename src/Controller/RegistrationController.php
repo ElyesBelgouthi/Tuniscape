@@ -199,9 +199,8 @@ class RegistrationController extends AbstractController
 
             return $this->redirectToRoute('app_forgot_password');
         }
-
         return $this->render('registration/reset_password.html.twig', [
-            'resetPasswordForm' => $form->createView(),
+            'resetPasswordForm' => $form->createView()
         ]);
     }
 }
