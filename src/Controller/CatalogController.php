@@ -42,12 +42,14 @@ class CatalogController extends AbstractController
         }
 
 
-
+        if($entityName == 'accommodation' or $entityName == 'food' or $entityName == 'activity'){
         return $this->render('catalog/index.html.twig', [
             'cards'=>$cards,
             'page'=>$page,
             'name'=>$entityName,
             'max'=> ceil($size / $nb)
-        ]);
+        ]);} else {
+            return $this->redirectToRoute("app_home");
+        }
     }
 }
