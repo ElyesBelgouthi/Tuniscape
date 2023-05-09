@@ -17,6 +17,9 @@ class FoodController extends AbstractController
 {
     #[Route('/food', 'food_list_all')]
     public function index(ManagerRegistry $doctrine) : Response{
+        if(!$this->isGranted("ROLE_ADMIN")){
+            return $this->redirectToRoute('app_home');
+        }
         $repository = $doctrine->getRepository(Food::class);
         $foods = $repository->findAll();
         return $this->render("food/index.html.twig",[
@@ -26,7 +29,10 @@ class FoodController extends AbstractController
     }
     #[Route('/food/edit/{id?0}', name: 'app_food_edit')]
     public function addActivity(Request $request, EntityManagerInterface $entityManager, Food $food = null): Response
-    {   $isAdded = false;
+    {   if(!$this->isGranted("ROLE_ADMIN")){
+        return $this->redirectToRoute('app_home');
+    }
+        $isAdded = false;
 
         if(!$food){
             $food = new Food();
@@ -56,6 +62,9 @@ class FoodController extends AbstractController
 
     #[Route('/food/delete/{id}', 'app_food_delete')]
     public function deleteActivity( EntityManagerInterface $entityManager, Food $food = null): RedirectResponse {
+        if(!$this->isGranted("ROLE_ADMIN")){
+            return $this->redirectToRoute('app_home');
+        }
         if($food){
             $entityManager->remove($food);
             $entityManager->flush();

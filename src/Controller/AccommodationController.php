@@ -18,6 +18,9 @@ use Symfony\Component\String\Slugger\SluggerInterface;
 class AccommodationController extends AbstractController
 {   #[Route('/accommodation/', 'accommodation_list_all')]
     public function index(ManagerRegistry $doctrine) : Response{
+    if(!$this->isGranted("ROLE_ADMIN")){
+        return $this->redirectToRoute('app_home');
+    }
         $repository = $doctrine->getRepository(Accommodation::class);
         $accommodations = $repository->findAll();
         return $this->render("accommodation/index.html.twig",[
@@ -27,7 +30,10 @@ class AccommodationController extends AbstractController
     }
     #[Route('/accommodation/edit/{id?0}', name: 'app_accommodation_edit')]
     public function addAccommodation(Request $request, EntityManagerInterface $entityManager,SluggerInterface $slugger, Accommodation $accommodation = null): Response
-    {   $isAdded = false;
+    {   if(!$this->isGranted("ROLE_ADMIN")){
+        return $this->redirectToRoute('app_home');
+    }
+        $isAdded = false;
 
         if(!$accommodation){
         $accommodation = new Accommodation();
@@ -80,6 +86,9 @@ class AccommodationController extends AbstractController
 
     #[Route('/accommodation/delete/{id}', 'app_accommodation_delete')]
     public function deleteAccommodation( EntityManagerInterface $entityManager, Accommodation $accommodation = null): RedirectResponse {
+        if(!$this->isGranted("ROLE_ADMIN")){
+            return $this->redirectToRoute('app_home');
+        }
         if($accommodation){
             $entityManager->remove($accommodation);
             $entityManager->flush();

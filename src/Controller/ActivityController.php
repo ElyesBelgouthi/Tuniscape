@@ -16,6 +16,9 @@ class ActivityController extends AbstractController
 {
     #[Route('/activity', 'activity_list_all')]
     public function index(ManagerRegistry $doctrine) : Response{
+        if(!$this->isGranted("ROLE_ADMIN")){
+            return $this->redirectToRoute('app_home');
+        }
         $repository = $doctrine->getRepository(Activity::class);
         $activities = $repository->findAll();
         return $this->render("activity/index.html.twig",[
@@ -25,7 +28,10 @@ class ActivityController extends AbstractController
     }
     #[Route('/activity/edit/{id?0}', name: 'app_activity_edit')]
     public function addActivity(Request $request, EntityManagerInterface $entityManager, Activity $activity = null): Response
-    {   $isAdded = false;
+    {   if(!$this->isGranted("ROLE_ADMIN")){
+        return $this->redirectToRoute('app_home');
+    }
+        $isAdded = false;
 
         if(!$activity){
             $activity = new Activity();
