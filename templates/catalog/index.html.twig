@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catalog</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.4.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-KyZXEAg3QhqLMpG8r+Knujsl7/1L_dstPt3HV5HzF6Gvk/e3E1wPGZF5_M8ydObm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <link rel="stylesheet" href="calender/cal.css" />
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
+    <link rel="stylesheet" href="{{ asset("assets/css/styles2.css") }}">
+    <link rel="stylesheet" href="{{ asset("assets/css/styles.css") }}">
+    <link rel="stylesheet" href="{{ asset("assets/css/style.css") }}">
+</head>
+
+<body>
+{% include "navbar.html.twig" %}
+
+<main>
+    <div class="bg">
+
+        <section id="cart">
+            <h1 class="section__title section__title--intro animate__animated animate__fadeInLeft">
+                <strong>TUNISIA</strong>
+            </h1>
+        </section>
+        <div class="category-block2">
+            <div class="text-container sectionTitle">
+                <p>Please Choose Your {{ name }}</p>
+
+            </div>
+           <!-- <label for="location">Location:</label>
+            <select name="location" id="location">
+                <option value="all">All Locations</option>
+                <option value="Tunis">Tunis</option>
+                <option value="Ariana">Ariana</option>
+                <option value="Sousse">Sousse</option>
+                <option value="Hammamet">Hammamet</option>
+            </select>-->
+        </div>
+        <!-- loula -->
+        <div class="category-block" id="to-live">
+
+            <div class="card-container">
+                {% set i = 1 %}
+                {% for card in cards %}
+                    <div class="card" data-location ="{% if card.region is defined%} {{ card.region }} {% endif %}">
+                        <img class="img-card" src="{{ asset('assets/img/hotels/leRoyal.jpg'  ) }}" width="100%" height="100%" alt="Card image">
+                        <div class="textBox">
+                            <h3>{{ card.name }}</h3>
+                            <p>{{ card.description }}</p>
+                            <a href="{{ path('app_details', {'id': card.id, 'type': 'activity'}) }}" class="login--btn btn">More</a>
+                            <a class="login--btn btn add-btn" href="{{ path("cart_add", {'id': card.id, 'type': 'activity'}) }}">Add</a>
+                            {% set i = i + 1 %}
+
+                        </div>
+                    </div>
+
+                {% endfor %}
+
+
+
+                </div>
+
+
+
+            </div>
+        <div style="text-align: center;">
+            {% if(page != 1)  %}
+                <a href="{{ path("app_catalog", {'entityName':name, 'page':page-1 })  }}" class="btn" style="margin-right: 20px"> Previous Page </a>
+            {% endif %}
+            {% if(page < max   )  %}
+                <a href="{{ path("app_catalog", {'entityName':name, 'page':page+1 }) }}" class="btn"> Next Page </a>
+            {% endif %}
+            <h4 style="text-align: center">Page : {{ page }}</h4>
+        </div>
+
+
+    </div>
+</main>
+
+<footer>
+    {% include "footer.html.twig" %}
+</footer>
+
+<!-- Add any necessary JavaScript here -->
+<script src="{{ asset('assets/js/filter.js') }}"></script>
+
+</body>
+
+
+</html>

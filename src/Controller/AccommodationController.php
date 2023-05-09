@@ -6,15 +6,21 @@ use App\Entity\Accommodation;
 use App\Form\AccommodationType;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\String\Slugger\SluggerInterface;
 
 class AccommodationController extends AbstractController
-{   #[Route('/accommodation', 'accommodation_list_all')]
+{   #[Route('/accommodation/', 'accommodation_list_all')]
     public function index(ManagerRegistry $doctrine) : Response{
+    if(!$this->isGranted("ROLE_ADMIN")){
+        return $this->redirectToRoute('app_home');
+    }
         $repository = $doctrine->getRepository(Accommodation::class);
         $accommodations = $repository->findAll();
         return $this->render("accommodation/index.html.twig",[
@@ -23,8 +29,11 @@ class AccommodationController extends AbstractController
 
     }
     #[Route('/accommodation/edit/{id?0}', name: 'app_accommodation_edit')]
-    public function addAccommodation(Request $request, EntityManagerInterface $entityManager, Accommodation $accommodation = null): Response
-    {   $isAdded = false;
+    public function addAccommodation(Request $request, EntityManagerInterface $entityManager,SluggerInterface $slugger, Accommodation $accommodation = null): Response
+    {   if(!$this->isGranted("ROLE_ADMIN")){
+        return $this->redirectToRoute('app_home');
+    }
+        $isAdded = false;
 
         if(!$accommodation){
         $accommodation = new Accommodation();
@@ -34,7 +43,30 @@ class AccommodationController extends AbstractController
         $form = $this->createForm(AccommodationType::class, $accommodation);
         $form->handleRequest($request);
 
-        if($form->isSubmitted()){
+        if($form->isSubmitted()&&$form->isValid()){
+            /** @var UploadedFile $photo */
+            $photo = $form->get('photo')->getData();
+            if ($photo) {
+                $originalFilename = pathinfo($photo->getClientOriginalName(), PATHINFO_FILENAME);
+                // this is needed to safely include the file name as part of the URL
+                $safeFilename = $slugger->slug($originalFilename);
+                $newFilename = $safeFilename.'-'.uniqid().'.'.$photo->guessExtension();
+
+                // Move the file to the directory where brochures are stored
+                try {
+                    $photo->move(
+                        $this->getParameter('accommodation_directory'),
+                        $newFilename
+                    );
+                } catch (FileException $e) {
+                    // ... handle exception if something happens during file upload
+                }
+
+                // updates the 'brochureFilename' property to store the PDF file name
+                // instead of its contents
+                $accommodation->setImage($newFilename);
+            }
+
             $entityManager->persist($accommodation);
             $entityManager->flush();
             if($isAdded){
@@ -54,6 +86,9 @@ class AccommodationController extends AbstractController
 
     #[Route('/accommodation/delete/{id}', 'app_accommodation_delete')]
     public function deleteAccommodation( EntityManagerInterface $entityManager, Accommodation $accommodation = null): RedirectResponse {
+        if(!$this->isGranted("ROLE_ADMIN")){
+            return $this->redirectToRoute('app_home');
+        }
         if($accommodation){
             $entityManager->remove($accommodation);
             $entityManager->flush();

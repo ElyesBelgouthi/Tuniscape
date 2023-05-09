@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <title>Admin Space</title>
+</head>
+<body>
+<div class="container">
+    <h1>Welcome {{ app.user.lastName }} to the admin space:</h1>
+    <div class="card" style="width: 18rem;margin-top: 50px">
+        <div class="card-body">
+            <h5 class="card-title">{{ app.user.firstName }}</h5>
+            <h6 class="card-subtitle mb-2 text-muted">Admin</h6>
+            <p class="card-text">Nationality : {{ app.user.nationality }}</p>
+            <p class="card-text">Age : {{ app.user.age }}</p>
+            <a href="#" class="card-link">{{ app.user.email }}</a>
+        </div>
+    </div>
+
+    <div class="row" style="margin-top: 50px">
+        <div class="col"> <a href="{{ path('accommodation_list_all') }}" class="btn btn-primary btn-lg">Accommodations</a></div>
+        <div class="col"><a href="{{ path('activity_list_all') }}" class="btn btn-primary btn-lg">Activities</a></div>
+        <div class="col"><a href="{{ path('food_list_all') }}" class="btn btn-primary btn-lg">Dishes</a></div>
+    </div>
+
+    <a style="margin-top: 50px" href="{{ path('app_home') }}" class="btn btn-secondary btn-lg">Homepage</a>
+</div>
+
+
+
+</body>
+</html>

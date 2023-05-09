@@ -30,7 +30,7 @@
                                     </a>
 
                                     {% if app.user and is_granted('ROLE_ADMIN') %}
-                                    <a href="#">
+                                    <a href="{{ path('app_admin') }}">
                                         <button>
                                             <i class="fa-solid fa-clipboard" style="color: #ffc93c;"></i>
                                             Admin Space
