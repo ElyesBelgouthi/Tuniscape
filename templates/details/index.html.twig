@@ -35,7 +35,13 @@
     </section>
 {% endif %}
 <section class="img--gallery">
-    <h1 class="section__subtitle--intro">You will enjoy</h1>
+    <h1 class="section__subtitle--intro">{% if type=='food' %}
+        Ingredients
+            {% else %}
+                You will enjoy !
+        {% endif %}
+
+    </h1>
     <div class="group">
         <div
                 class="item"

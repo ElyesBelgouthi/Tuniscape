@@ -46,7 +46,7 @@
             <!-- loula -->
     <section class="explore--content">
             <div class="category-block" id="to-live">
-                <div class="see-more"><h3 class="section-title sectionTitle">What to eat?</h3>
+                <div class="see-more"><h3 class="section-title sectionTitle">choose where you want to live</h3>
                     <a id="fold" href="live-catalog.html">
                         <b>Show Catalog !</b>
                     </a>
@@ -69,9 +69,35 @@
                     <button class="scroll-button right-button">&gt;</button>
                 </div>
             </div>
+        <div class="category-block" id="to-do">
+            <div class="see-more"><h3 class="section-title sectionTitle">Choose what you want to visit</h3>
+                <a id="fold" href="live-catalog.html">
+                    <b>Show Catalog !</b>
+                </a>
+            </div>
+
+
+            <div class="scrollable">
+
+                {% for card in acards %}
+                    <div class="card">
+                        <img class="img-card" src="{{ asset('assets/img/hotels/leRoyal.jpg'  ) }}" width="100%" height="100%" alt="Card image">
+                        <div class="textBox">
+                            <h3>{{ card.name }}</h3>
+                            <p>{{ card.description }}</p>
+                            <a href="{{ path('app_details', {'id': card.id, 'type': 'activity'}) }}" class="login--btn btn">More</a>
+                            <a class="login--btn btn add-btn" href="{{ path("cart_add", {'id': card.id, 'type': 'activity'}) }}">Add</a>
+                        </div>
+                    </div>
+                {% endfor %}
+
+                <button class="scroll-button left-button">&lt;</button>
+                <button class="scroll-button right-button">&gt;</button>
+            </div>
+        </div>
 
             <div class="category-block" id="to-eat">
-                <div class="see-more"><h3 class="section-title sectionTitle">choose where to live</h3>
+                <div class="see-more"><h3 class="section-title sectionTitle">choose what you want to eat</h3>
                     <a id="fold" href="live-catalog.html">
                         <b>Show Catalog !</b>
                     </a></div>
@@ -95,31 +121,7 @@
                     <button class="scroll-button right-button">&gt;</button>
                 </div>
             </div>
-            <div class="category-block" id="to-do">
-                <div class="see-more"><h3 class="section-title sectionTitle">What to do</h3>
-                    <a id="fold" href="live-catalog.html">
-                        <b>Show Catalog !</b>
-                    </a></div>
 
-
-                <div class="scrollable">
-
-                    {% for card in acards %}
-                        <div class="card">
-                            <img class="img-card" src="{{ asset('assets/img/hotels/leRoyal.jpg'  ) }}" width="100%" height="100%" alt="Card image">
-                            <div class="textBox">
-                                <h3>{{ card.name }}</h3>
-                                <p>{{ card.description }}</p>
-                                <a href="{{ path('app_details', {'id': card.id, 'type': 'activity'}) }}" class="login--btn btn">More</a>
-                                <a class="login--btn btn add-btn" href="{{ path("cart_add", {'id': card.id, 'type': 'activity'}) }}">Add</a>
-                            </div>
-                        </div>
-                    {% endfor %}
-
-                    <button class="scroll-button left-button">&lt;</button>
-                    <button class="scroll-button right-button">&gt;</button>
-                </div>
-            </div>
     </section>
 
     {% include'footer.html.twig' %}

@@ -36,12 +36,13 @@ class DetailsController extends AbstractController
             case 'accommodation':
                 $name = $accommodationRepository->find($id)->getName();
                 $description = $accommodationRepository->find($id)->getDescription();
-                $region = $accommodationRepository->find($id)->getRegion()->getName();
+
                 $typeAccommodation=$accommodationRepository->find($id)->getType();
                 $latitude=$accommodationRepository->find($id)->getLatitude();
                 $longitude=$accommodationRepository->find($id)->getLongitude();
                 break;
             case 'activity':
+                $name=$activityRepository->find($id)->getName();
                 $region=$activityRepository->find($id)->getRegion()->getName();
                 $description=$activityRepository->find($id)->getDescription();
                 $latitude=$activityRepository->find($id)->getLatitude();
