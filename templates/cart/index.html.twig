@@ -50,32 +50,27 @@
             </div>
         </section>
 <section class="explore--content">
-        <div class="category-block2">
-            <div class="text-container">
-                <h3 class="section-title sectionTitle">You chose to stay :</h3>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat similique recusandae eligendi. Fuga minima vitae atque repudiandae molestias nostrum nam mollitia maxime autem, recusandae a facere, ipsam voluptatum necessitatibus laborum!
-                </p>
-            </div>
-            <div class="p-cart-container">
+    <div class="category-block">
+        <h3 class="sectionTitle">You chose to stay at :</h3>
+        <div class="scrollable">
 
-                {% for card in accommodationCards %}
-                    <div class="card">
+            {% for card in accommodationCards %}
+                <div class="card">
 
-                        <img class="img-card" src="{{ asset('assets/img/hotels/leRoyal.jpg'  ) }}" width="100%" height="100%" alt="Card image">
-                        <div class="textBox">
-                            <h3>{{ card.name }}</h3>
-                            <p>{{ card.description }}</p>
-                            <a class="remove--btn" href="{{ path("cart_remove", {'id': card.id, 'type': 'accommodation'}) }}">
-                                <i class="fa-solid fa-circle-minus" style="color: #f41f1f;"></i>
-                            </a>
-                            <a href="{{ path('app_details', {'id': card.id, 'type': 'accommodation'}) }}" class="login--btn btn">More</a>
-                        </div>
+                    <img class="img-card" src="{{ asset('assets/img/hotels/leRoyal.jpg'  ) }}" width="100%" height="100%" alt="Card image">
+                    <div class="textBox">
+                        <h3 class="card__title">{{ card.name }}</h3>
+                        <a class="remove--btn" href="{{ path("cart_remove", {'id': card.id, 'type': 'accommodation'}) }}">
+                            <i class="fa-solid fa-circle-minus" style="color: #f41f1f;"></i>
+                        </a>
+                        <a href="{{ path('app_details', {'id': card.id, 'type': 'accommodation'}) }}" class="login--btn btn">More</a>
                     </div>
-                {% endfor %}
-
-            </div>
+                </div>
+            {% endfor %}
+            <button class="scroll-button left-button"><i class="fa-solid fa-arrow-left"></i></button>
+            <button class="scroll-button right-button"><i class="fa-solid fa-arrow-right"></i></button>
         </div>
-
+    </div>
 
         <div class="category-block">
             <h3 class="section-title sectionTitle">You chose to visit :</h3>
@@ -85,8 +80,7 @@
                     <div class="card">
                         <img class="img-card" src="{{ asset('assets/img/hotels/marhababeach.jpg'  ) }}" width="100%" height="100%" alt="Card image">
                         <div class="textBox">
-                            <h3>{{ card.name }}</h3>
-                            <p>{{ card.description }}</p>
+                            <h3 class="card__title">{{ card.name }}</h3>
                             <a class="remove--btn" href="{{ path("cart_remove", {'id': card.id, 'type': 'activity'}) }}">
                                 <i class="fa-solid fa-circle-minus" style="color: #f41f1f;"></i>
                             </a>
@@ -94,8 +88,8 @@
                         </div>
                     </div>
                 {% endfor %}
-                <button class="scroll-button left-button">&lt;</button>
-                <button class="scroll-button right-button">&gt;</button>
+                <button class="scroll-button left-button"><i class="fa-solid fa-arrow-left"></i></button>
+                <button class="scroll-button right-button"><i class="fa-solid fa-arrow-right"></i></button>
             </div>
         </div>
 
@@ -109,8 +103,7 @@
                     <div class="card">
                         <img class="img-card" src="{{ asset('assets/img/hotels/leRoyal.jpg'  ) }}" width="100%" height="100%" alt="Card image">
                         <div class="textBox">
-                            <h3>{{ card.name }}</h3>
-                            <p>{{ card.description }}</p>
+                            <h3 class="card__title">{{ card.name }}</h3>
                             <a class="remove--btn" href="{{ path("cart_remove", {'id': card.id, 'type': 'food'}) }}">
                                 <i class="fa-solid fa-circle-minus" style="color: #f41f1f;"></i>
                             </a>
@@ -118,8 +111,8 @@
                         </div>
                     </div>
                 {% endfor %}
-                <button class="scroll-button left-button">&lt;</button>
-                <button class="scroll-button right-button">&gt;</button>
+                <button class="scroll-button left-button"><i class="fa-solid fa-arrow-left"></i></button>
+                <button class="scroll-button right-button"><i class="fa-solid fa-arrow-right"></i></button>
             </div>
         </div>
     </div>
