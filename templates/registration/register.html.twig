@@ -26,7 +26,8 @@
         <div class="form-container">
             <p class="title">Sign up</p>
             <div class="login-box">
-                {{ form_start(registrationForm, {'attr': {'id': 'registration-form'}}) }}                    <div class="user-box full-box">
+                {{ form_start(registrationForm, {'attr': {'id': 'registration-form'} }) }}
+                <div class="user-box full-box">
                     {{ form_widget(registrationForm.email, {'required': true}) }}
                     <label>Email</label>
                 </div>
@@ -91,3 +92,4 @@
 <script src="{{ asset("assets/js/register.js") }}"></script>
 </body>
 </html>
+

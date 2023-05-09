@@ -13,8 +13,7 @@ class RegionController extends AbstractController
     #[Route('/region', name: 'app_region')]
     public function index(
         RegionRepository $regionRepository
-    ): Response
-    {
+    ): Response {
         $regions = $regionRepository->findAll();
 
         $data = [];

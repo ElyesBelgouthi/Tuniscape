@@ -1,71 +1,79 @@
 <header>
-    <div class="logo">
-        <img src="{{ asset('assets/img/logo.png') }}" />
-    </div>
-    <nav class="nav">
-        <ul class="nav__list">
-            <li class="nav__item"><a href="{{ path('app_home') }}" class="nav__link">Home</a></li>
-            <li class="nav__item">
+  <a class="logo" href="{{ path('app_home') }}">
+    <img src="{{ asset('assets/img/logo.png') }}" />
+  </a>
+  <nav class="nav">
+    <ul class="nav__list">
+      <li class="nav__item"><a href="{{ path('app_home') }}" class="nav__link">Home</a></li>
+      <li class="nav__item">
 
-                <a href="#services" class="nav__link">Services</a>
-            </li>
-            <li class="nav__item">
-                <a href="#about" class="nav__link">About us</a>
-            </li>
-            {% if app.user %}
-                <li class="nav__item ">
-                    <div class="dropdown" id="dropdown">
-                        <button onclick="handleDropdownClicked()">
-                            <i class="fa-solid fa-circle-user" style="color: #ffc93c; font-size: 20px;"></i>
-                            <h3 style="font-size: 20px">{{ app.user.username() }}</h3>
+        <a href="#services" class="nav__link">Services</a>
+      </li>
+      <li class="nav__item">
+        <a href="#about" class="nav__link">About us</a>
+      </li>
+      {% if app.user %}
+        <li class="nav__item ">
+          <div class="dropdown" id="dropdown">
+            <button onclick="handleDropdownClicked()">
+              <i class="fa-solid fa-circle-user" style="color: #ffc93c; font-size: 20px;"></i>
+              <h3 style="font-size: 20px">{{ app.user.username() }}</h3>
+            </button>
+            <div id="menu" class="menu">
+              <div id="menu-inner" class="menu-inner">
+                <div class="main-menu">
+                  <a href="{{ path('app_cart') }}">
+                    <button>
+                      <i class="fa-solid fa-briefcase" style="color: #ffc93c;"></i>
+                      Cart
+                    </button>
+                  </a>
+
+                  {% if app.user and is_granted('ROLE_ADMIN') %}
+                    <a href="#">
+                      <button>
+                        <i class="fa-solid fa-clipboard" style="color: #ffc93c;"></i>
+                        Admin Space
+                      </button>
+                    </a>
+                  {% else %}
+                    <a href="{{ path('app_user_edit') }}">
+                      <button>
+                        <i class="fa-solid fa-address-card" style="color: #ffc93c;"></i>
+                        Profile
+                      </button>
+                    </a>
+                  {% endif %}
+                  <a href="{{ path('app_logout') }}">
+                    <button>
+                      <i class="fa-solid fa-arrow-right-from-bracket" style="color: #ffc93c;"></i>
+                      Logout
+                    </button>
+                  </a>
+                  <!-- other menu buttons -->
+                </div>
+                <!--<div id="my-tools" class="sub-menu">
+                        <button onclick="handleSubMenuClicked()">
+                            <span> arrow_back </span>Tools
                         </button>
-                        <div id="menu" class="menu">
-                            <div id="menu-inner" class="menu-inner">
-                                <div class="main-menu">
-                                    <a href="{{ path('app_cart') }}">
-                                    <button>
-                                        <i class="fa-solid fa-briefcase" style="color: #ffc93c;"></i>
-                                        Cart
-                                    </button>
-                                    </a>
-                                    <a href="{{ path('app_logout') }}">
-                                         <button>
-                                        <i class="fa-solid fa-arrow-right-from-bracket" style="color: #ffc93c;"></i>
-                                        Logout
-                                         </button>
-                                    </a>
-                                    {% if app.user and is_granted('ROLE_ADMIN') %}
-                                    <a href="#">
-                                        <button>
-                                            <i class="fa-solid fa-clipboard" style="color: #ffc93c;"></i>
-                                            Admin Space
-                                        </button>
-                                    </a>
-                                    {% endif %}
-                                        <!-- other menu buttons -->
-                                </div>
-                                <!--<div id="my-tools" class="sub-menu">
-                                        <button onclick="handleSubMenuClicked()">
-                                            <span> arrow_back </span>Tools
-                                        </button>
-                                </div>-->
+                </div>-->
 
-                                    <!-- other sub menus -->
-                            </div>
+                <!-- other sub menus -->
+              </div>
 
-                        </div>
-                    </div>
-                </li>
-            {% else %}
-                <li class="nav__item">
-                    <a href="{{ path('app_login') }}" target="_self"
-                    ><button class="login--btn btn">LOGIN</button></a
-                    >
-                </li>
-            {% endif %}
-        </ul>
-    </nav>
+            </div>
+          </div>
+        </li>
+      {% else %}
+        <li class="nav__item">
+          <a href="{{ path('app_login') }}" target="_self"
+          ><button class="login--btn btn">LOGIN</button></a
+          >
+        </li>
+      {% endif %}
+    </ul>
+  </nav>
 </header>
 {% block javascripts %}
-    <script src="{{ asset('assets/js/Dropdown.js') }}"></script>
+  <script src="{{ asset('assets/js/Dropdown.js') }}"></script>
 {% endblock %}

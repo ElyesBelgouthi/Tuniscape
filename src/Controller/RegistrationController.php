@@ -1,6 +1,5 @@
 <?php
 
-
 namespace App\Controller;
 
 use App\Entity\User;
@@ -21,7 +20,6 @@ use Symfony\Component\Mailer\MailerInterface;
 use App\Form\ForgotPasswordFormType;
 use App\Form\ResetPasswordFormType;
 
-
 class RegistrationController extends AbstractController
 {
     /**
@@ -34,8 +32,7 @@ class RegistrationController extends AbstractController
         UserAuthenticatorInterface  $userAuthenticator,
         LoginAuthenticator $authenticator,
         EntityManagerInterface      $entityManager,
-    ): Response
-    {
+    ): Response {
         $user = new User();
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
@@ -93,8 +90,7 @@ class RegistrationController extends AbstractController
     public function verifyUserEmail(
         string                 $code,
         EntityManagerInterface $entityManager
-    ): Response
-    {
+    ): Response {
         $user = $entityManager->getRepository(User::class)->findOneBy(['verficationCode' => $code]);
 
         if ($user) {
@@ -115,7 +111,6 @@ class RegistrationController extends AbstractController
     public function forgotPassword(
         Request $request,
         EntityManagerInterface $entityManager,
-
     ): Response {
 
         $form = $this->createForm(ForgotPasswordFormType::class);
@@ -205,4 +200,3 @@ class RegistrationController extends AbstractController
         ]);
     }
 }
-

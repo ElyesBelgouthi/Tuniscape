@@ -1,178 +1,219 @@
 <!DOCTYPE html>
 <html lang="en-GB">
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="stylesheet" href="{{ asset('node_modules/@fortawesome/fontawesome-free/css/all.css') }}" />
-    <link
-            href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;800;900&display=swap"
-            rel="stylesheet"
-    />
-    <link
-            rel="stylesheet"
-            href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
-    />
-    <link rel="stylesheet" href="{{ asset("assets/css/styles.css") }}" />
-    <title>Tuniscape</title>
-</head>
-<body>
-{% include "navbar.html.twig" %}
-<section class="intro" id="home">
-    <h1
-            class="section__title section__title--intro animate__animated animate__fadeInLeft"
-    >
+    <link rel="stylesheet"
+      href="{{
+      asset(
+        'node_modules/@fortawesome/fontawesome-free/css/all.css'
+      )
+      }}" />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;800;900&display=swap"
+      rel="stylesheet" />
+    <link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <link rel="stylesheet" href="{{ asset('assets/css/styles.css') }}" />
+    <title>
+      Tuniscape
+    </title>
+  </head>
+  <body>
+    {% include 'navbar.html.twig' %}
+    <section class="intro" id="home">
+      <h1 class="section__title section__title--intro animate__animated animate__fadeInLeft">
         <strong>TUNISIA</strong>
-    </h1>
-    <p class="section__subtitle section__subtitle--intro">
+      </h1>
+      <p class="section__subtitle section__subtitle--intro">
         A land of white sands and ancient stories
-    </p>
-    <a href="{{ path('app_explore') }}">
-    <button class="explore--btn exploreButton animate__animated animate__fadeInUp">
-        Explore Now
-    </button>
-    </a>
-</section>
-<section class="authentic-experiences" id="authentic-experiences">
-    <h2 class="section--title">Customized Holidays and Authentic Tunisian Experiences</h2>
-    <p class="section__subtitle--authentic-experiences">
-        Discover Tunisia through unique, tailored experiences that showcase the best of its culture, history, and natural beauty.
-    </p>
-    <div class="experiences">
-        <div class="experience__item">
-            <img src="{{ asset('assets/img/parallax1.jpg') }}" alt="Experience 1" class="experience__img" />
-            <h3 class="experience__title">Cultural Immersion</h3>
-            <p class="experience__description">
-                Experience the rich history and vibrant culture of Tunisia as you explore ancient ruins, dine on traditional cuisine, and engage with local artisans.
-            </p>
-        </div>
-        <div class="experience__item">
-            <img src="{{ asset('assets/img/hotels/leRoyal.jpg') }}" alt="Experience 2" class="experience__img" />
-            <h3 class="experience__title">Adventure Travel</h3>
-            <p class="experience__description">
-                Dive into adventure as you trek through the Sahara Desert, explore mysterious caves, or embark on a thrilling off-road journey across the diverse landscapes of Tunisia.
-            </p>
-        </div>
-        <div class="experience__item">
-            <img src="{{ asset('assets/img/dougga-tunisia.jpg') }}" alt="Experience 3" class="experience__img" />
-            <h3 class="experience__title">Luxury Retreats</h3>
-            <p class="experience__description">
-                Indulge in a world of luxury as you unwind at exclusive resorts, rejuvenate in serene spas, and savor exquisite gourmet experiences in Tunisia's most idyllic settings.
-            </p>
-        </div>
-    </div>
-    <a href="{{ path('app_explore') }}">
+      </p>
+      <a href="{{ path('app_explore') }}">
         <button class="explore--btn exploreButton animate__animated animate__fadeInUp">
-            Explore Now
+          Explore Now
         </button>
-    </a>
-</section>
-<!-- Parallax-->
-<section class="parallax--container">
-    <div class="title">
-        <h3>Some beautiful places in</h3>
-        <h1>TUNISIA</h1>
-    </div>
+      </a>
+    </section>
+    <section class="authentic-experiences" id="authentic-experiences">
+      <h2 class="section--title">
+        Customized Holidays and Authentic Tunisian Experiences
+      </h2>
+      <p class="section__subtitle--authentic-experiences">
+        Discover Tunisia through unique, tailored experiences that showcase the
+        best of its culture, history, and natural beauty.
+      </p>
+      <div class="experiences">
+        <div class="experience__item">
+          <img src="{{ asset('assets/img/parallax1.jpg') }}"
+            alt="Experience 1"
+            class="experience__img" />
+          <h3 class="experience__title">
+            Cultural Immersion
+          </h3>
+          <p class="experience__description">
+            Experience the rich history and vibrant culture of Tunisia as you
+            explore ancient ruins, dine on traditional cuisine, and engage with
+            local artisans.
+          </p>
+        </div>
+        <div class="experience__item">
+          <img src="{{ asset('assets/img/hotels/leRoyal.jpg') }}"
+            alt="Experience 2"
+            class="experience__img" />
+          <h3 class="experience__title">
+            Adventure Travel
+          </h3>
+          <p class="experience__description">
+            Dive into adventure as you trek through the Sahara Desert, explore
+            mysterious caves, or embark on a thrilling off-road journey across
+            the diverse landscapes of Tunisia.
+          </p>
+        </div>
+        <div class="experience__item">
+          <img src="{{ asset('assets/img/dougga-tunisia.jpg') }}"
+            alt="Experience 3"
+            class="experience__img" />
+          <h3 class="experience__title">
+            Luxury Retreats
+          </h3>
+          <p class="experience__description">
+            Indulge in a world of luxury as you unwind at exclusive resorts,
+            rejuvenate in serene spas, and savor exquisite gourmet experiences
+            in Tunisia's most idyllic settings.
+          </p>
+        </div>
+      </div>
+      <a href="{{ path('app_explore') }}">
+        <button class="explore--btn exploreButton animate__animated animate__fadeInUp">
+          Explore Now
+        </button>
+      </a>
+    </section>
+    <!-- Parallax -->
+    <section class="parallax--container">
+      <div class="title">
+        <h3>
+          Some beautiful places in
+        </h3>
+        <h1>
+          TUNISIA
+        </h1>
+      </div>
 
-    <div class="parallex parallax-one">
-        <h2>SIDI BOU SAID</h2>
-    </div>
+      <div class="parallex parallax-one">
+        <h2>
+          SIDI BOU SAID
+        </h2>
+      </div>
 
-    <div class="block">
+      <div class="block">
         <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta,
-            cupiditate! Commodi laborum fugit molestias necessitatibus adipisci,
-            quod nobis dolore, facere eveniet placeat, asperiores saepe mollitia
-            ipsum facilis pariatur et nostrum!
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta,
+          cupiditate! Commodi laborum fugit molestias necessitatibus adipisci,
+          quod nobis dolore, facere eveniet placeat, asperiores saepe mollitia
+          ipsum facilis pariatur et nostrum!
         </p>
-    </div>
+      </div>
 
-    <div class="parallex parallax-two">
-        <h2>TATAOUINE</h2>
-    </div>
+      <div class="parallex parallax-two">
+        <h2>
+          TATAOUINE
+        </h2>
+      </div>
 
-    <div class="block">
+      <div class="block">
         <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Error facere
-            ducimus, molestiae expedita quasi eligendi dicta quidem omnis? Aut cum
-            eveniet deleniti odio recusandae ex aliquam sit quod, ut nemo.
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Error facere
+          ducimus, molestiae expedita quasi eligendi dicta quidem omnis? Aut cum
+          eveniet deleniti odio recusandae ex aliquam sit quod, ut nemo.
         </p>
-    </div>
+      </div>
 
-    <div class="parallex parallax-three">
-        <h2>AMPHITHEATER OF EL JEM</h2>
-    </div>
+      <div class="parallex parallax-three">
+        <h2>
+          AMPHITHEATER OF EL JEM
+        </h2>
+      </div>
 
-    <div class="block">
+      <div class="block">
         <p>
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Magnam
-            quibusdam fugit soluta quaerat laboriosam architecto eligendi itaque,
-            aliquid atque ea iusto, eum, dicta adipisci! Aut ducimus minima
-            dolorum earum enim!
+          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Magnam
+          quibusdam fugit soluta quaerat laboriosam architecto eligendi itaque,
+          aliquid atque ea iusto, eum, dicta adipisci! Aut ducimus minima
+          dolorum earum enim!
         </p>
-    </div>
-</section>
+      </div>
+    </section>
 
-<!-- Our Services-->
-<section class="our-services" id="services">
-    <h2 class="section--title">The Service You Deserve</h2>
-    <p class="section__subtitle--service">
+    <!-- Our Services -->
+    <section class="our-services" id="services">
+      <h2 class="section--title">
+        The Service You Deserve
+      </h2>
+      <p class="section__subtitle--service">
         Lorem ipsum dolor sit amet consectetur adipisicing elit.
-    </p>
-    <div class="services">
+      </p>
+      <div class="services">
         <div class="service__item service__description">
-            <i class="fa-solid fa-landmark"></i>
-            <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor
-                tempore libero, labore ut.
-            </p>
+          <i class="fa-solid fa-landmark"></i>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor
+            tempore libero, labore ut.
+          </p>
         </div>
 
         <a href="#" class="service__item">
-            <img src={{ asset('assets/img/service4.jpeg')}} alt="" class="service__img" />
+          <img src="{{ asset('assets/img/service4.jpeg') }}"
+            alt=""
+            class="service__img" />
         </a>
 
         <div class="service__item service__description">
-            <i class="fa-solid fa-utensils"></i>
-            <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor
-                tempore libero, labore ut.
-            </p>
+          <i class="fa-solid fa-utensils"></i>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor
+            tempore libero, labore ut.
+          </p>
         </div>
 
         <a href="#" class="service__item">
-            <img src={{ asset('assets/img/service1.jpg') }} alt="" class="service__img" />
+          <img src="{{ asset('assets/img/service1.jpg') }}"
+            alt=""
+            class="service__img" />
         </a>
 
         <div class="service__item service__description">
-            <i class="fa-solid fa-star"></i>
-            <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor
-                tempore libero, labore ut.
-            </p>
+          <i class="fa-solid fa-star"></i>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor
+            tempore libero, labore ut.
+          </p>
         </div>
 
         <a href="#" class="service__item">
-            <img src="{{ asset('assets/img/service3.jpg') }}" alt="" class="service__img" />
+          <img src="{{ asset('assets/img/service3.jpg') }}"
+            alt=""
+            class="service__img" />
         </a>
-    </div>
-</section>
+      </div>
+    </section>
 
-<!-- weather -->
-<marquee id="marquee" behavior="scroll" direction="left" scrollamount="10">
-    Live Weather Update: Sunny skies and 70°F in Los Angeles, CA | Partly
-    cloudy and 60°F in New York, NY | Rainy and 55°F in Seattle, WA | Clear
-    skies and 80°F in Miami, FL
-</marquee>
+    <!-- weather -->
+    <marquee id="marquee" behavior="scroll" direction="left" scrollamount="10">
+      Live Weather Update: Sunny skies and 70°F in Los Angeles, CA | Partly
+      cloudy and 60°F in New York, NY | Rainy and 55°F in Seattle, WA | Clear
+      skies and 80°F in Miami, FL
+    </marquee>
 
-{% include "footer.html.twig" %}
-<a href="#home" class="comeback--btn--anchor"
-><button class="explore--btn comeback--btn">
-        <i class="fa-solid fa-arrow-up"></i></button
-    ></a>
-<!--Content ends-->
-<script async defer src="{{ asset('assets/js/Weather.js') }}"></script>
-</body>
+    {% include 'footer.html.twig' %}
+    <a href="#home" class="comeback--btn--anchor">
+      <button class="explore--btn comeback--btn">
+        <i class="fa-solid fa-arrow-up"></i>
+      </button>
+    </a>
+    <!-- Content ends -->
+    <script async defer src="{{ asset('assets/js/Weather.js') }}"></script>
+  </body>
 </html>

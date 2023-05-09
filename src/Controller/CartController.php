@@ -18,18 +18,20 @@ use App\Service\ReservationService;
 use Symfony\Component\HttpFoundation\Request;
 use App\Entity\User;
 
-
 class CartController extends AbstractController
 {
-
-
-    #[Route('/cart', name: 'app_cart')]
-    public function index(UserRepository $userRepository ,ReservationService $reservationService, AccommodationRepository $accommodationRepository, FoodRepository $foodRepository, ActivityRepository $activityRepository): Response
-    {
+    #[Route("/cart", name: "app_cart")]
+    public function index(
+        UserRepository $userRepository,
+        ReservationService $reservationService,
+        AccommodationRepository $accommodationRepository,
+        FoodRepository $foodRepository,
+        ActivityRepository $activityRepository
+    ): Response {
         $user = $this->getUser();
         if ($user === null) {
             // handle the case when the user is not logged in, e.g., redirect to the login page
-            return $this->redirectToRoute('app_login');
+            return $this->redirectToRoute("app_login");
         }
 
         $userId = $user->getId();
@@ -39,7 +41,7 @@ class CartController extends AbstractController
         if ($userId) {
             $reservation = $reservationService->findReservationByUser($User2);
         }
-        if($reservation === null){
+        if ($reservation === null) {
             return $this->render("cart/noItemsAddedNow.html.twig");
         }
 
@@ -55,10 +57,10 @@ class CartController extends AbstractController
         $activities = $reservation->getActivity();
         $startDateValue = $reservation->getStartDate();
         $endDateValue = $reservation->getEndDate();
-        if($startDateValue === NULL){
+        if ($startDateValue === null) {
             $startDateValue = new \DateTime("NOW");
         }
-        if($endDateValue === NULL){
+        if ($endDateValue === null) {
             $endDateValue = new \DateTime("NOW");
         }
         foreach ($foods as $food) {
@@ -73,16 +75,16 @@ class CartController extends AbstractController
             $userActivities[] = $activity;
         }
 
-        return $this->render('cart/index.html.twig', [
-            'foodCards' => $userFoods,
-            'accommodationCards' => $userAccommodations,
-            'activityCards' => $userActivities,
-            'startDateValue' => $startDateValue->format('Y-m-d'),
-            'endDateValue' => $endDateValue->format('Y-m-d')
+        return $this->render("cart/index.html.twig", [
+            "foodCards" => $userFoods,
+            "accommodationCards" => $userAccommodations,
+            "activityCards" => $userActivities,
+            "startDateValue" => $startDateValue->format("Y-m-d"),
+            "endDateValue" => $endDateValue->format("Y-m-d"),
         ]);
     }
 
-    #[Route('/cart/add', name: 'cart_add')]
+    #[Route("/cart/add", name: "cart_add")]
     public function add(
         Request $request,
         EntityManagerInterface $entityManager,
@@ -93,13 +95,13 @@ class CartController extends AbstractController
         ActivityRepository $activityRepository,
         LoggerInterface $logger
     ): Response {
-        $id = $request->query->get('id');
-        $type = $request->query->get('type');
-        $this->addFlash('notice', 'here');
+        $id = $request->query->get("id");
+        $type = $request->query->get("type");
+        $this->addFlash("notice", "here");
         $user = $this->getUser();
         if ($user === null) {
             // handle the case when the user is not logged in, e.g., redirect to the login page
-            return $this->redirectToRoute('app_login');
+            return $this->redirectToRoute("app_login");
         }
 
         $userId = $user->getId();
@@ -115,30 +117,34 @@ class CartController extends AbstractController
         }
 
         switch ($type) {
-            case 'food':
+            case "food":
                 $food = $foodRepository->find($id);
                 if ($food) {
                     $reservation->addFood($food);
                 }
                 break;
-            case 'accommodation':
-
-                $logger->info("Attempting to remove accommodation with ID: {$id}");
+            case "accommodation":
+                $logger->info(
+                    "Attempting to remove accommodation with ID: {$id}"
+                );
 
                 $accommodation = $accommodationRepository->find($id);
                 if ($accommodation) {
-
-                    $logger->info("Found accommodation: {$accommodation->getName()}");
+                    $logger->info(
+                        "Found accommodation: {$accommodation->getName()}"
+                    );
                     $reservation->addAccommodation($accommodation);
                     $logger->info("Removed accommodation from reservation");
                     $logger->info("Flushed changes to the database");
 
-                    $this->addFlash('notice', $accommodation->getName());
+                    $this->addFlash("notice", $accommodation->getName());
                 } else {
-                    $logger->error("Could not find accommodation with ID: {$id}");
+                    $logger->error(
+                        "Could not find accommodation with ID: {$id}"
+                    );
                 }
                 break;
-            case 'activity':
+            case "activity":
                 $activity = $activityRepository->find($id);
                 if ($activity) {
                     $reservation->addActivity($activity);
@@ -150,8 +156,7 @@ class CartController extends AbstractController
         return $this->redirectToRoute("app_explore");
     }
 
-
-    #[Route('/cart/remove', name: 'cart_remove')]
+    #[Route("/cart/remove", name: "cart_remove")]
     public function remove(
         Request $request,
         EntityManagerInterface $em,
@@ -162,12 +167,12 @@ class CartController extends AbstractController
         ActivityRepository $activityRepository,
         LoggerInterface $logger
     ): Response {
-        $id = $request->query->get('id');
-        $type = $request->query->get('type');
+        $id = $request->query->get("id");
+        $type = $request->query->get("type");
         $user = $this->getUser();
         if ($user === null) {
             // handle the case when the user is not logged in, e.g., redirect to the login page
-            return $this->redirectToRoute('app_login');
+            return $this->redirectToRoute("app_login");
         }
 
         $userId = $user->getId();
@@ -178,21 +183,23 @@ class CartController extends AbstractController
             $reservation = $reservationService->findReservationByUser($User2);
         }
         switch ($type) {
-            case 'food':
+            case "food":
                 $food = $foodRepository->find($id);
                 if ($food) {
                     $reservation->removeFood($food);
                 }
                 break;
-            case 'accommodation':
+            case "accommodation":
                 $accommodation = $accommodationRepository->find($id);
                 if ($accommodation) {
                     $reservation->removeAccommodation($accommodation);
                 } else {
-                    $logger->error("Could not find accommodation with ID: {$id}");
+                    $logger->error(
+                        "Could not find accommodation with ID: {$id}"
+                    );
                 }
                 break;
-            case 'activity':
+            case "activity":
                 $activity = $activityRepository->find($id);
                 if ($activity) {
                     $reservation->removeActivity($activity);
@@ -205,7 +212,7 @@ class CartController extends AbstractController
         return $this->redirectToRoute("app_cart");
     }
 
-    #[Route('/cart/approve', name: 'cart_approve')]
+    #[Route("/cart/approve", name: "cart_approve")]
     public function changeDate(
         Request $request,
         EntityManagerInterface $em,
@@ -216,7 +223,7 @@ class CartController extends AbstractController
         $user = $this->getUser();
         if ($user === null) {
             // handle the case when the user is not logged in, e.g., redirect to the login page
-            return $this->redirectToRoute('app_login');
+            return $this->redirectToRoute("app_login");
         }
         $userId = $user->getId();
         $User2 = $userRepository->find($userId);
@@ -225,7 +232,7 @@ class CartController extends AbstractController
         if ($userId) {
             $reservation = $reservationService->findReservationByUser($User2);
         }
-        if($reservation->getStartDate()!== null){
+        if ($reservation->getStartDate() !== null) {
         }
         //dd($request);
         $startDateValue = $request->request->get("start");

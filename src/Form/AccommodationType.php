@@ -29,7 +29,7 @@ class AccommodationType extends AbstractType
             ->add('description')
             #->add('latitude')
             #->add('longitude')
-            ->add('region', EntityType::class,[
+            ->add('region', EntityType::class, [
                 'class'=>Region::class,
                 'choice_label'=>'name',
             ])
