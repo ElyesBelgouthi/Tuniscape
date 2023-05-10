@@ -858,6 +858,7 @@ header {
 
 .experience__img {
     width: 100%;
+    min-height: 30% ;
     margin-bottom: 20px;
     height: auto;
     display: block;

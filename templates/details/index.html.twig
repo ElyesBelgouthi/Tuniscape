@@ -28,44 +28,12 @@
     <p>{{ description }}</p>
 </section>
 {% if region %}
-    <section id="region" class="description--container">
-        {{ region }}
+    <section id="region" class="region--container">
+        Region: {{ region }}
     </section>
 {% endif %}
-<section class="img--gallery">
-    <h1 class="section__subtitle--intro">{% if type=='food' %}
-        Ingredients
-            {% else %}
-                You will enjoy !
-        {% endif %}
-
-    </h1>
-    <div class="group">
-        <div
-                class="item"
-                style="background-image: url({{asset('assets/img/parallax2.jpg')  }})"
-        ></div>
-        <div
-                class="item"
-                style="background-image: url({{asset('assets/img/parallax2.jpg')  }})"
-        ></div>
-        <div
-                class="item"
-                style="background-image: url({{asset('assets/img/parallax2.jpg')  }})"
-        ></div>
-        <div
-                class="item"
-                style="background-image: url({{asset('assets/img/parallax2.jpg')  }})"
-        ></div>
-        <div
-                class="item"
-                style="background-image: url({{asset('assets/img/parallax2.jpg')  }})"
-        ></div>
-    </div>
-</section>
 <a href="{{ path('cart_add',{'id':id,'type':type }) }}"><button class="explore--btn">Add To Cart</button></a>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/gsap.min.js"></script>
 <script type="text/javascript" src="{{ asset('assets/js/details.js') }}"></script>
 </body>
 </html>

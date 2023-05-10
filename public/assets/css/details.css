@@ -183,6 +183,16 @@ h3 {
     margin: 0 10vw;
 }
 
+.region--container {
+
+    background-color: var(--clr-accent);
+    font-family: var(--ff-primary);
+    font-size: var(--fs-h3);
+    font-weight: var(--fw-bold);
+    padding: 100px 50px;
+    margin: 10vh 10vw;
+}
+
 .group {
     text-align: center;
     white-space: nowrap;
