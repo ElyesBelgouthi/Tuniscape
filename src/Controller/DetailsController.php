@@ -25,6 +25,8 @@ class DetailsController extends AbstractController
         $name = null;
         $description = null;
         $region = null;
+        $image = null;
+        $folderName = null;
         $typeAccommodation=null;
         $latitude=null;
         $longitude=null;
@@ -32,21 +34,26 @@ class DetailsController extends AbstractController
             case 'food':
                 $name = $foodRepository->find($id)->getName();
                 $description = $foodRepository->find($id)->getDescription();
+                $image = $foodRepository->find($id)->getImage();
+                $folderName = "uploads/foods/";
                 break;
             case 'accommodation':
                 $name = $accommodationRepository->find($id)->getName();
                 $description = $accommodationRepository->find($id)->getDescription();
-
+                $image = $accommodationRepository->find($id)->getImage();
                 $typeAccommodation=$accommodationRepository->find($id)->getType();
                 $latitude=$accommodationRepository->find($id)->getLatitude();
                 $longitude=$accommodationRepository->find($id)->getLongitude();
+                $folderName = "uploads/accommodations/";
                 break;
             case 'activity':
                 $name=$activityRepository->find($id)->getName();
+                $image = $activityRepository->find($id)->getImage();
                 $region=$activityRepository->find($id)->getRegion()->getName();
                 $description=$activityRepository->find($id)->getDescription();
                 $latitude=$activityRepository->find($id)->getLatitude();
                 $longitude=$activityRepository->find($id)->getLongitude();
+                $folderName = "uploads/activities/";
 
         }
 
@@ -54,6 +61,8 @@ class DetailsController extends AbstractController
             'id'=>$id,
             'type'=>$type,
             'name' => $name,
+            'image' => $image,
+            'folderName' => $folderName,
             'description' => $description,
             'region' => $region,
             'typeAccommodation'=>$typeAccommodation,

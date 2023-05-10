@@ -28,8 +28,13 @@ class RegionFormType extends AbstractType
                 'class' => Region::class,
                 'choice_label' => 'name',
                 'choices' => $regions,
+                'attr' => ['class' => 'region--name']
             ])
-            ->add('Filter', SubmitType::class);
+            ->add('Filter', SubmitType::class, [
+                'attr' => ['class' => 'explore--btn'],
+                'label' => '<i class="fas fa-filter"></i> Filter',
+                'label_html' => true,
+            ]);
     }
     public function configureOptions(OptionsResolver $resolver): void
     {
