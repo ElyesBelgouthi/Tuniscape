@@ -15,7 +15,7 @@ class CatalogController extends AbstractController
 {
     #[Route('/catalog/{entityName}/{page?1}', name: 'app_catalog')]
     public function index(EntityManagerInterface $entityManager,string $entityName = null, int $page ): Response
-    {   $nb = 4;
+    {   $nb = 8;
         $cards=null;
         $repository=null;
         $size = null;
