@@ -34,21 +34,19 @@ class CartController extends AbstractController
 
         $userId = $user->getId();
         $User2 = $userRepository->find($userId);
-        // Find the existing reservation by user ID, if any
+
         $reservation = null;
         if ($userId) {
             $reservation = $reservationService->findReservationByUser($User2);
         }
         if($reservation === null){
-            return $this->render("cart/noItemsAddedNow.html.twig");
+            $reservation = new Reservation();
         }
 
-        // Initialize empty arrays to store the food, accommodation, and activity items
         $userFoods = [];
         $userAccommodations = [];
         $userActivities = [];
 
-        // Loop through the reservations and retrieve the food, accommodation, and activity items
 
         $foods = $reservation->getFoods();
         $accommodations = $reservation->getAccommodations();

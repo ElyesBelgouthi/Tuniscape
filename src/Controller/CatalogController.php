@@ -26,7 +26,7 @@ class CatalogController extends AbstractController
         $repository = null;
         $size = null;
         $folderName = null;
-
+        $regionForm = null;
         switch ($entityName) {
             case 'accommodation':
                 $repository = $entityManager->getRepository(Accommodation::class);
@@ -58,6 +58,7 @@ class CatalogController extends AbstractController
             $size = sizeof($repository->findAll());
         }
 
+
         switch ($entityName) {
             case 'accommodation':
                 $folderName = "uploads/accommodations/";
@@ -70,16 +71,18 @@ class CatalogController extends AbstractController
                 break;
         }
 
-        return $this->render('catalog/index.html.twig', [
+        $properties = [
             'cards' => $cards,
             'page' => $page,
             'name' => $entityName,
             'max' => ceil($size / $nb),
-            'folderName' => $folderName,
-            'regionForm' => ($entityName === 'accommodation' || $entityName === 'activity') ? $regionForm : null,
-        ]);
+            'folderName' => $folderName
+        ];
+
+        if($entityName !== 'food'){
+            $properties['regionForm'] = $regionForm;
+
+        }
+        return $this->render('catalog/index.html.twig', $properties);
     }
-
-
-
 }
