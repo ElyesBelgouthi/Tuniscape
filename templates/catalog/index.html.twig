@@ -21,14 +21,11 @@
 <body>
 {% include "navbar.html.twig" %}
 
-<main>
-    <div class="bg">
-
-        <section id="cart">
+<section class="intro">
             <h1 class="section__title section__title--intro animate__animated animate__fadeInLeft">
                 <strong>{{ name|upper }}</strong>
             </h1>
-        </section>
+
         <div class="category-block2">
             <div class="text-container sectionTitle">
                 <p>Please Choose Your {{ name }}</p>
@@ -40,7 +37,10 @@
             {% endif %}
 
         </div>
+</section>
         <!-- loula -->
+<section class="explore--content">
+
         <div class="category-block" id="to-live">
 
             <div class="card-container">
@@ -59,12 +59,7 @@
                     </div>
 
                 {% endfor %}
-
-
-
-                </div>
-
-
+            </div>
 
             </div>
         <div style="text-align: center;">
@@ -78,8 +73,7 @@
         </div>
 
 
-    </div>
-</main>
+</section>
 
 <footer>
     {% include "footer.html.twig" %}

@@ -1,10 +1,13 @@
 .explore--content {
-  background-image: url(../img/bgimg.jpg);
-  background-color: var(--clr-dark);
-
-  background-size: auto;
+  background-image: url(../img/blurry-gradient-haikei.svg);
+  background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+  background-color: var(--clr-dark);
+}
+
+#visual {
+  z-index: -5;
 }
 
 .scrollable {
@@ -45,19 +48,17 @@
 
 
 .category-block {
-  background-color: #f0f0f0;
   padding: 2rem;
   margin-bottom: 2rem;
   max-width: 90%;
   margin-left: auto;
   margin-right: auto;
-  background: rgba( 86, 86, 86, 0.35);
-  box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37);
-  backdrop-filter: blur( 2px);
-  -webkit-backdrop-filter: blur( 2px);
+  background: rgba( 255, 255, 255, 0.35 );
+  box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+  backdrop-filter: blur( 17px );
+  -webkit-backdrop-filter: blur( 17px );
   border-radius: 10px;
-  border: 1px solid rgba( 255, 255, 255, 0.18);
-
+  border: 1px solid rgba( 255, 255, 255, 0.18 );
 
 }
 .card-container {
@@ -73,18 +74,17 @@
 }
 
 .category-block2 {
-  background-color: #f0f0f0;
   padding: 2rem;
   margin-bottom: 2rem;
   max-width: 90%;
   margin-left: auto;
   margin-right: auto;
-  background: rgba(86, 86, 86, 0.35);
-  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-  backdrop-filter: blur(2px);
-  -webkit-backdrop-filter: blur(2px);
+  background: rgba( 255, 255, 255, 0.6 );
+  box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+  backdrop-filter: blur( 17px );
+  -webkit-backdrop-filter: blur( 17px );
   border-radius: 10px;
-  border: 1px solid rgba(255, 255, 255, 0.18);
+  border: 1px solid rgba( 255, 255, 255, 0.18 );
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -334,3 +334,4 @@ label[for="location"] {
   display: flex;
   justify-content: space-between;
 }
+
