@@ -128,7 +128,7 @@ class RegistrationController extends AbstractController
                 // Generate a verification code
                 $verificationCode = random_int(100000, 999999);
                 $user->setVerficationCode($verificationCode);
-
+                $username=$user->getUsername();
                 $entityManager->flush();
 
                 // Send the password reset email
@@ -139,6 +139,7 @@ class RegistrationController extends AbstractController
                     ->html("
                     <h1>Hi! You requested a password reset.</h1>
                     <p>
+                        Hello {$username}
                         To reset your password, click the following link: <br><br>
                         <a href=\"https://localhost:8000/reset-password/{$verificationCode}\">Reset my Password</a>.
                     </p>
@@ -173,11 +174,17 @@ class RegistrationController extends AbstractController
         $user = $entityManager->getRepository(User::class)->findOneBy(['verficationCode' => $code]);
 
         if ($user) {
+            if(!$user->isIsVerified())
+            {
+                $this->verifyUserEmail($code,$entityManager);
+
+            }
             $form = $this->createForm(ResetPasswordFormType::class);
             $form->handleRequest($request);
 
+
             if ($form->isSubmitted() && $form->isValid()) {
-                // Update the user's password
+
                 $user->setPassword(
                     $userPasswordHasher->hashPassword(
                         $user,
