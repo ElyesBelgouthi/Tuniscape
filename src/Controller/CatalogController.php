@@ -19,11 +19,13 @@ class CatalogController extends AbstractController
         $cards=null;
         $repository=null;
         $size = null;
+        $folderName = null;
         switch($entityName){
             case 'accommodation':
                 $repository = $entityManager->getRepository(Accommodation::class);
                 $cards=$repository->findBy([],[],$nb,($page-1)*$nb);
                 $size = sizeof($repository->findAll());
+                $folderName = "uploads/accommodations/";
 
 
                 break;
@@ -31,11 +33,15 @@ class CatalogController extends AbstractController
                 $repository = $entityManager->getRepository(Food::class);
                 $cards=$repository->findBy([],[],$nb,($page-1)*$nb);
                 $size = sizeof($repository->findAll());
+                $folderName = "uploads/foods/";
+
                 break;
             case 'activity':
                 $repository = $entityManager->getRepository(Activity::class);
                 $cards=$repository->findBy([],[],$nb,($page-1)*$nb);
                 $size = sizeof($repository->findAll());
+                $folderName = "uploads/activities/";
+
                 break;
 
 
@@ -47,7 +53,8 @@ class CatalogController extends AbstractController
             'cards'=>$cards,
             'page'=>$page,
             'name'=>$entityName,
-            'max'=> ceil($size / $nb)
+            'max'=> ceil($size / $nb),
+            'folderName'=> $folderName
         ]);} else {
             return $this->redirectToRoute("app_home");
         }

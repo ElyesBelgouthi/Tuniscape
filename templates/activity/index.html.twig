@@ -33,6 +33,7 @@
                 <th scope="col">Name</th>
                 <th scope="col">Description</th>
                 <th scope="col">Region</th>
+                <th scope="col">Photo </th>
                 <th scope="col">Actions</th>
             </tr>
             </thead>
@@ -43,6 +44,7 @@
                     <td>{{ activity.name }}</td>
                     <td>{{ activity.description }}</td>
                     <td>{{ activity.region.name }}</td>
+                    <td>{{ activity.image }}</td>
                     <td><a href="{{ path('app_activity_delete', {id: activity.id} ) }}" class="btn btn-danger">delete</a>
                         <a href="{{ path('app_activity_edit', {id: activity.id} ) }}" class="btn btn-primary">edit</a>
                     </td>

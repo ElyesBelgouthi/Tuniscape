@@ -53,7 +53,7 @@
 
                     {% for card in pcards %}
                         <div class="card">
-                            <img class="img-card" src="{{ asset('assets/img/hotels/leRoyal.jpg'  ) }}" width="100%" height="100%" alt="Card image">
+                            <img class="img-card" src="{{ asset("uploads/accommodations/" ~ card.image) }}" width="100%" height="100%" alt="Card image">
                             <div class="textBox">
                                 <h3 class="card__title">{{ card.name }}</h3>
                                 <a href="{{ path('app_details', {'id': card.id, 'type': 'accommodation'}) }}" class="login--btn btn">More</a>
@@ -78,7 +78,7 @@
 
                 {% for card in acards %}
                     <div class="card">
-                        <img class="img-card" src="{{ asset('assets/img/hotels/leRoyal.jpg'  ) }}" width="100%" height="100%" alt="Card image">
+                        <img class="img-card" src="{{ asset("uploads/activities/" ~ card.image) }}" width="100%" height="100%" alt="Card image">
                         <div class="textBox">
                             <h3 class="card__title">{{ card.name }}</h3>
                             <a href="{{ path('app_details', {'id': card.id, 'type': 'activity'}) }}" class="login--btn btn">More</a>
@@ -102,7 +102,7 @@
 
                     {% for card in fcards %}
                         <div class="card">
-                            <img class="img-card" src="{{ asset('assets/img/hotels/leRoyal.jpg'  ) }}" width="100%" height="100%" alt="Card image">
+                            <img class="img-card" src="{{ asset("uploads/foods/" ~ card.image) }}" width="100%" height="100%" alt="Card image">
                             <div class="textBox">
                                 <h3 class="card__title">{{ card.name }}</h3>
                                 <a href="{{ path('app_details', {'id': card.id, 'type': 'food'}) }}" class="login--btn btn">More</a>

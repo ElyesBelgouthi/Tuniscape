@@ -34,6 +34,7 @@
                 <th scope="col">Type</th>
                 <th scope="col">Description</th>
                 <th scope="col">Region</th>
+                <th scope="col">Photo</th>
                 <th scope="col">Actions</th>
             </tr>
             </thead>
@@ -45,6 +46,7 @@
                     <td>{{ accommodation.type }}</td>
                     <td>{{ accommodation.description }}</td>
                     <td>{{ accommodation.region.name }}</td>
+                    <td>{{ accommodation.image }}</td>
                     <td><a href="{{ path('app_accommodation_delete', {id: accommodation.id} ) }}" class="btn btn-danger">delete</a>
                         <a href="{{ path('app_accommodation_edit', {id: accommodation.id} ) }}" class="btn btn-primary">edit</a>
                     </td>

@@ -48,7 +48,7 @@
                 {% set i = 1 %}
                 {% for card in cards %}
                     <div class="card" data-location ="{% if card.region is defined%} {{ card.region }} {% endif %}">
-                        <img class="img-card" src="{{ asset('assets/img/hotels/leRoyal.jpg'  ) }}" width="100%" height="100%" alt="Card image">
+                        <img class="img-card" src="{{ asset( folderName ~ card.image) }}" width="100%" height="100%" alt="Card image">
                         <div class="textBox">
                             <h3>{{ card.name }}</h3>
                             <p>{{ card.description }}</p>
