@@ -30,16 +30,8 @@
         <div class="category-block2">
             <div class="text-container sectionTitle">
                 <p>Please Choose Your {{ name }}</p>
-
             </div>
-           <!-- <label for="location">Location:</label>
-            <select name="location" id="location">
-                <option value="all">All Locations</option>
-                <option value="Tunis">Tunis</option>
-                <option value="Ariana">Ariana</option>
-                <option value="Sousse">Sousse</option>
-                <option value="Hammamet">Hammamet</option>
-            </select>-->
+            {{ form(regionForm) }}
         </div>
         <!-- loula -->
         <div class="category-block" id="to-live">
@@ -48,7 +40,7 @@
                 {% set i = 1 %}
                 {% for card in cards %}
                     <div class="card" data-location ="{% if card.region is defined%} {{ card.region }} {% endif %}">
-                        <img class="img-card" src="{{ asset('assets/img/hotels/leRoyal.jpg'  ) }}" width="100%" height="100%" alt="Card image">
+                        <img class="img-card" src="{{ asset( folderName ~ card.image) }}" width="100%" height="100%" alt="Card image">
                         <div class="textBox">
                             <h3>{{ card.name }}</h3>
                             <p>{{ card.description }}</p>

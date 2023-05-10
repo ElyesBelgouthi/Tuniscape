@@ -25,6 +25,9 @@ class Food
     #[ORM\ManyToMany(targetEntity: Reservation::class, inversedBy: "food")]
     private Collection $reservations;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $image = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -81,6 +84,18 @@ class Food
         if ($this->reservations->removeElement($reservation)) {
             $reservation->removeFood($this);
         }
+
+        return $this;
+    }
+
+    public function getImage(): ?string
+    {
+        return $this->image;
+    }
+
+    public function setImage(?string $image): self
+    {
+        $this->image = $image;
 
         return $this;
     }

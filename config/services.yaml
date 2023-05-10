@@ -5,6 +5,8 @@
 # https://symfony.com/doc/current/best_practices.html#use-parameters-for-application-configuration
 parameters:
     accommodation_directory: '%kernel.project_dir%/public/uploads/accommodations'
+    food_directory: '%kernel.project_dir%/public/uploads/foods'
+    activity_directory: '%kernel.project_dir%/public/uploads/activities'
 services:
 
     # default configuration for services in *this* file
