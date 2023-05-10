@@ -62,17 +62,34 @@ class RegistrationController extends AbstractController
             $email = (new Email())
                 ->from(new Address('tuniscape@gmail.com', 'Tuniscape'))
                 ->to($user->getEmail())
-                ->subject('Please Confirm your Email')
+                ->subject('Welcome to Tuniscape - Please Verify Your Email')
                 ->html("
-                    <h1>Hi! Please confirm your email!</h1>
-                    <p>
-                        Please confirm your email address by clicking the following link: <br><br>
-                        <a href=\"https://localhost:8000/register/verify/{$verficationCode}\">Confirm my Email</a>.
-                    </p>
-                    <p>
-                        Cheers!
-                    </p>
-                ");
+        <div style=\"font-family: Arial, sans-serif; max-width: 600px;\">
+            <h1 style=\"font-size: 24px; color: #333;\">Hello and welcome to Tuniscape!</h1>
+            <p style=\"font-size: 16px; color: #555; line-height: 1.5;\">
+                We're excited to have you on board as you embark on an incredible journey to discover the rich culture, history, and breathtaking landscapes that Tunisia has to offer.
+            </p>
+            <p style=\"font-size: 16px; color: #555; line-height: 1.5;\">
+                Before we get started, please take a moment to confirm your email address by clicking on the link below:
+            </p>
+            <p>
+                <a href=\"https://localhost:8000/register/verify/{$verficationCode}\" style=\"background-color: #1E90FF; color: #ffffff; text-decoration: none; padding: 10px 20px; border-radius: 5px; font-size: 16px;\">Verify My Email</a>
+            </p>
+            <p style=\"font-size: 16px; color: #555; line-height: 1.5;\">
+                By verifying your email, you'll be able to stay updated on our latest offerings, exclusive promotions, and personalized recommendations to make your Tuniscape experience unforgettable.
+            </p>
+            <p style=\"font-size: 16px; color: #555; line-height: 1.5;\">
+                Once again, welcome to the Tuniscape family. We look forward to helping you create lasting memories in Tunisia!
+            </p>
+            <p style=\"font-size: 16px; color: #555; line-height: 1.5;\">
+                Warm regards,
+            </p>
+            <p style=\"font-size: 16px; color: #555; line-height: 1.5;\">
+                The Tuniscape Team
+            </p>
+        </div>
+    ");
+
 
             // Send the email
             $mailer->send($email);

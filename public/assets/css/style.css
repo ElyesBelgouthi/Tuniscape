@@ -1,5 +1,10 @@
 .explore--content {
+  background-image: url(../img/bgimg.jpg);
   background-color: var(--clr-dark);
+
+  background-size: auto;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 .scrollable {
@@ -38,19 +43,22 @@
   margin-bottom: 1rem;
 }
 
+
 .category-block {
   background-color: #f0f0f0;
   padding: 2rem;
-  font-family: var(--ff-primary);
-  margin: 4rem auto;
-  max-width: 80%;
-
-  background: var(--clr-accent);
-  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-  backdrop-filter: blur(2px);
-  -webkit-backdrop-filter: blur(2px);
+  margin-bottom: 2rem;
+  max-width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+  background: rgba( 86, 86, 86, 0.35);
+  box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37);
+  backdrop-filter: blur( 2px);
+  -webkit-backdrop-filter: blur( 2px);
   border-radius: 10px;
-  border: 1px solid rgba(255, 255, 255, 0.18);
+  border: 1px solid rgba( 255, 255, 255, 0.18);
+
+
 }
 .card-container {
   display: grid;
@@ -65,23 +73,25 @@
 }
 
 .category-block2 {
+  background-color: #f0f0f0;
   padding: 2rem;
   margin-bottom: 2rem;
   max-width: 90%;
   margin-left: auto;
   margin-right: auto;
-  background: rgba( 255, 255, 255, 0.65 );
-  box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
-  backdrop-filter: blur( 10.5px );
-  -webkit-backdrop-filter: blur( 10.5px );
+  background: rgba(86, 86, 86, 0.35);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
   border-radius: 10px;
-  border: 1px solid rgba( 255, 255, 255, 0.18 );
+  border: 1px solid rgba(255, 255, 255, 0.18);
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-family: var(--ff-primary);
 
 }
+
+
 
 .scroll-button {
   position: absolute;
