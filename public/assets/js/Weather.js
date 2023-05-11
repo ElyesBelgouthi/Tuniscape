@@ -2,16 +2,7 @@ const apiKey = "a5ccb57c995d92ff1acfc9bcd2125e6a";
 const marquee = document.querySelector("#marquee");
 
 const regions = fetch('/region')
-    .then(response => response.json())
-    .then(data => {
-        const regions = data.map(region => {
-            const { name, latitude, longitude } = region;
-            return { name, latitude, longitude };
-        });
-        console.log(regions);
-        return regions; // add this line to return the regions array
-    });
-
+    .then(response => response.json());
 const weatherIcon = (weather) => {
     switch (weather) {
         case 'Thunderstorm':
@@ -44,7 +35,6 @@ const weatherIcon = (weather) => {
 
 const getWeatherData = (lat, lon) => {
     const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&appid=${apiKey}`;
-    // Make the API request using the Fetch API
     return fetch(url)
         .then(response => response.json())
         .then(data => {

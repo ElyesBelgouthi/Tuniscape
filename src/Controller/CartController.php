@@ -18,25 +18,24 @@ use Symfony\Component\HttpFoundation\Request;
 class CartController extends AbstractController
 {
 
-
     #[Route('/cart', name: 'app_cart')]
-    public function index(UserRepository $userRepository ,ReservationService $reservationService, AccommodationRepository $accommodationRepository, FoodRepository $foodRepository, ActivityRepository $activityRepository): Response
+    public function index(UserRepository $userRepository ,ReservationService $reservationService): Response
     {
         $user = $this->getUser();
         if ($user === null) {
-            // handle the case when the user is not logged in, e.g., redirect to the login page
             return $this->redirectToRoute('app_login');
         }
 
         $userId = $user->getId();
-        $User2 = $userRepository->find($userId);
+        $realUser = $userRepository->find($userId);
 
         $reservation = null;
         if ($userId) {
-            $reservation = $reservationService->findReservationByUser($User2);
+            $reservation = $reservationService->findReservationByUser($realUser);
         }
         if($reservation === null){
             $reservation = new Reservation();
+            $reservation->setUser($realUser);
         }
 
         $userFoods = [];
@@ -91,20 +90,19 @@ class CartController extends AbstractController
         $this->addFlash('notice', 'here');
         $user = $this->getUser();
         if ($user === null) {
-            // handle the case when the user is not logged in, e.g., redirect to the login page
             return $this->redirectToRoute('app_login');
         }
 
         $userId = $user->getId();
-        $User2 = $userRepository->find($userId);
+        $realUser = $userRepository->find($userId);
         // Find the existing reservation by user ID, if any
         $reservation = null;
         if ($userId) {
-            $reservation = $reservationService->findReservationByUser($User2);
+            $reservation = $reservationService->findReservationByUser($realUser);
         }
         if ($reservation === null) {
             $reservation = new Reservation();
-            $reservation->setUser($User2);
+            $reservation->setUser($realUser);
         }
 
         switch ($type) {
@@ -198,11 +196,11 @@ class CartController extends AbstractController
             return $this->redirectToRoute('app_login');
         }
         $userId = $user->getId();
-        $User2 = $userRepository->find($userId);
+        $realUser = $userRepository->find($userId);
         // Find the existing reservation by user ID, if any
         $reservation = null;
         if ($userId) {
-            $reservation = $reservationService->findReservationByUser($User2);
+            $reservation = $reservationService->findReservationByUser($realUser);
         }
         //dd($request);
         $startDateValue = $request->request->get("start");
