@@ -97,16 +97,6 @@ class AccommodationController extends AbstractController
             $this->addFlash("alert", "the accommodation does not exist!");
         }
         return $this->redirectToRoute('accommodation_list_all');
-
-
-
     }
 
-    /*#[Route('/accommodation/{id}', name: 'app_accommodation_success')]
-    public function success(Accommodation $accommodation){
-        return $this->render("accommodation/success.html.twig",[
-            'accommodation'=>$accommodation,
-        ]);
-
-    }*/
 }

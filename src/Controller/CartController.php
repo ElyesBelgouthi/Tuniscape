@@ -6,17 +6,13 @@ use App\Entity\Reservation;
 use App\Repository\AccommodationRepository;
 use App\Repository\FoodRepository;
 use App\Repository\ActivityRepository;
-use App\Repository\ReservationRepository;
 use App\Repository\UserRepository;
-use Psr\Log\LoggerInterface;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Service\ReservationService;
 use Symfony\Component\HttpFoundation\Request;
-use App\Entity\User;
 
 
 class CartController extends AbstractController
@@ -89,7 +85,6 @@ class CartController extends AbstractController
         AccommodationRepository $accommodationRepository,
         ReservationService $reservationService,
         ActivityRepository $activityRepository,
-        LoggerInterface $logger
     ): Response {
         $id = $request->query->get('id');
         $type = $request->query->get('type');
@@ -120,20 +115,10 @@ class CartController extends AbstractController
                 }
                 break;
             case 'accommodation':
-
-                $logger->info("Attempting to remove accommodation with ID: {$id}");
-
                 $accommodation = $accommodationRepository->find($id);
                 if ($accommodation) {
-
-                    $logger->info("Found accommodation: {$accommodation->getName()}");
                     $reservation->addAccommodation($accommodation);
-                    $logger->info("Removed accommodation from reservation");
-                    $logger->info("Flushed changes to the database");
-
                     $this->addFlash('notice', $accommodation->getName());
-                } else {
-                    $logger->error("Could not find accommodation with ID: {$id}");
                 }
                 break;
             case 'activity':
@@ -158,7 +143,6 @@ class CartController extends AbstractController
         AccommodationRepository $accommodationRepository,
         ReservationService $reservationService,
         ActivityRepository $activityRepository,
-        LoggerInterface $logger
     ): Response {
         $id = $request->query->get('id');
         $type = $request->query->get('type');
@@ -186,8 +170,6 @@ class CartController extends AbstractController
                 $accommodation = $accommodationRepository->find($id);
                 if ($accommodation) {
                     $reservation->removeAccommodation($accommodation);
-                } else {
-                    $logger->error("Could not find accommodation with ID: {$id}");
                 }
                 break;
             case 'activity':
@@ -209,7 +191,6 @@ class CartController extends AbstractController
         EntityManagerInterface $em,
         UserRepository $userRepository,
         ReservationService $reservationService,
-        LoggerInterface $logger
     ): Response {
         $user = $this->getUser();
         if ($user === null) {
@@ -222,8 +203,6 @@ class CartController extends AbstractController
         $reservation = null;
         if ($userId) {
             $reservation = $reservationService->findReservationByUser($User2);
-        }
-        if($reservation->getStartDate()!== null){
         }
         //dd($request);
         $startDateValue = $request->request->get("start");
