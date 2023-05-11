@@ -49,10 +49,16 @@ class CatalogController extends AbstractController
                 $region = $regionForm->get('region')->getData();
             }
         }
-
         if ($region) {
-            $cards = $repository->findBy(['region' => $region], [], $nb, ($page - 1) * $nb);
-            $size = sizeof($repository->findBy(['region' => $region]));
+            if($entityName === 'accommodation'){
+                $cards = $repository->findBy(['region' => $region], [], $nb, ($page - 1) * $nb);
+                $size = sizeof($repository->findBy(['region' => $region]));
+            }
+            else {
+                $cards = $repository->findBy(['Region' => $region], [], $nb, ($page - 1) * $nb);
+                $size = sizeof($repository->findBy(['Region' => $region]));
+            }
+
         } else {
             $cards = $repository->findBy([], [], $nb, ($page - 1) * $nb);
             $size = sizeof($repository->findAll());
@@ -81,8 +87,8 @@ class CatalogController extends AbstractController
 
         if($entityName !== 'food'){
             $properties['regionForm'] = $regionForm;
-
         }
+
         return $this->render('catalog/index.html.twig', $properties);
     }
 }

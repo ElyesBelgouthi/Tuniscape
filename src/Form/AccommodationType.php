@@ -42,7 +42,7 @@ class AccommodationType extends AbstractType
                 'required' => false,
                 'constraints' => [
                     new File([
-                        'maxSize' => '1024k',
+                        'maxSize' => '20m',
                         'mimeTypes' => [
                             'image/jpg',
                             'image/jpeg',

@@ -41,6 +41,7 @@ class DetailsController extends AbstractController
                 $name = $accommodationRepository->find($id)->getName();
                 $description = $accommodationRepository->find($id)->getDescription();
                 $image = $accommodationRepository->find($id)->getImage();
+                $region=$activityRepository->find($id)->getRegion()->getName();
                 $typeAccommodation=$accommodationRepository->find($id)->getType();
                 $latitude=$accommodationRepository->find($id)->getLatitude();
                 $longitude=$accommodationRepository->find($id)->getLongitude();
