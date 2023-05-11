@@ -254,7 +254,7 @@ header {
     border-radius: 40px;
     transition: all 0.3s ease;
     cursor: pointer;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .exploreButton {
@@ -269,7 +269,7 @@ header {
 
 .explore--btn:hover {
     background-color: #c79005;
-    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
     transform: translateY(-3px);
 }
 
@@ -677,7 +677,7 @@ header {
 
 .line {
     height: 1px;
-    flex: 1 1 0%;
+    flex: 1 1 0;
     background-color: rgba(55, 65, 81, 1);
 }
 

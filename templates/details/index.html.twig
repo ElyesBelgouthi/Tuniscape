@@ -20,10 +20,12 @@
 <body>
 {% include "navbar.html.twig" %}
 <section id="banner" class="banner" style="background-image: url('{{ asset(folderName ~ image) }}')">
-    <h1 class="banner--title">{{ name }}</h1>
-    {% if region %}
-        <p>{{ region }}</p>
-    {% endif %}
+    <h1 class="banner--title">
+        {{ name }}
+        {% if region %}
+            <p>{{ region }}</p>
+        {% endif %}
+    </h1>
     <a href="#description" class="explore--btn learn--more">Learn More</a>
 </section>
 

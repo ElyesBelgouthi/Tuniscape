@@ -45,7 +45,7 @@
                         <span class="date-text date-return"></span>
                     </div>
                 </div>
-                <button type="submit" class="explore--btn btn--next" onclick="alert('Your reservation passed! You will receive a comfirmation mail once we arrange the paperwork')">NEXT</button>
+                <button type="submit" class="explore--btn btn--next" onclick="alert('Your reservation passed! You will receive a comfirmation mail once we arrange the paperwork')">SAVE</button>
                 </form>
             </div>
         </section>
@@ -78,7 +78,7 @@
 
                 {% for card in activityCards %}
                     <div class="card">
-                        <img class="img-card" ssrc="{{ asset("uploads/activities/" ~ card.image) }}" width="100%" height="100%" alt="Card image">
+                        <img class="img-card" src="{{ asset("uploads/activities/" ~ card.image) }}" width="100%" height="100%" alt="Card image">
                         <div class="textBox">
                             <h3 class="card__title">{{ card.name }}</h3>
                             <a class="remove--btn" href="{{ path("cart_remove", {'id': card.id, 'type': 'activity'}) }}">

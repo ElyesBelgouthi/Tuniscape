@@ -6,7 +6,6 @@ use App\Entity\Accommodation;
 use App\Entity\Activity;
 use App\Entity\Food;
 use App\Form\RegionFormType;
-use App\Form\RegionType;
 use App\Repository\AccommodationRepository;
 use App\Repository\RegionRepository;
 use Doctrine\ORM\EntityManagerInterface;

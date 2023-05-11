@@ -6,41 +6,36 @@ use App\Entity\Reservation;
 use App\Repository\AccommodationRepository;
 use App\Repository\FoodRepository;
 use App\Repository\ActivityRepository;
-use App\Repository\ReservationRepository;
 use App\Repository\UserRepository;
-use Psr\Log\LoggerInterface;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Service\ReservationService;
 use Symfony\Component\HttpFoundation\Request;
-use App\Entity\User;
 
 
 class CartController extends AbstractController
 {
 
-
     #[Route('/cart', name: 'app_cart')]
-    public function index(UserRepository $userRepository ,ReservationService $reservationService, AccommodationRepository $accommodationRepository, FoodRepository $foodRepository, ActivityRepository $activityRepository): Response
+    public function index(UserRepository $userRepository ,ReservationService $reservationService): Response
     {
         $user = $this->getUser();
         if ($user === null) {
-            // handle the case when the user is not logged in, e.g., redirect to the login page
             return $this->redirectToRoute('app_login');
         }
 
         $userId = $user->getId();
-        $User2 = $userRepository->find($userId);
+        $realUser = $userRepository->find($userId);
 
         $reservation = null;
         if ($userId) {
-            $reservation = $reservationService->findReservationByUser($User2);
+            $reservation = $reservationService->findReservationByUser($realUser);
         }
         if($reservation === null){
             $reservation = new Reservation();
+            $reservation->setUser($realUser);
         }
 
         $userFoods = [];
@@ -89,27 +84,25 @@ class CartController extends AbstractController
         AccommodationRepository $accommodationRepository,
         ReservationService $reservationService,
         ActivityRepository $activityRepository,
-        LoggerInterface $logger
     ): Response {
         $id = $request->query->get('id');
         $type = $request->query->get('type');
         $this->addFlash('notice', 'here');
         $user = $this->getUser();
         if ($user === null) {
-            // handle the case when the user is not logged in, e.g., redirect to the login page
             return $this->redirectToRoute('app_login');
         }
 
         $userId = $user->getId();
-        $User2 = $userRepository->find($userId);
+        $realUser = $userRepository->find($userId);
         // Find the existing reservation by user ID, if any
         $reservation = null;
         if ($userId) {
-            $reservation = $reservationService->findReservationByUser($User2);
+            $reservation = $reservationService->findReservationByUser($realUser);
         }
         if ($reservation === null) {
             $reservation = new Reservation();
-            $reservation->setUser($User2);
+            $reservation->setUser($realUser);
         }
 
         switch ($type) {
@@ -120,20 +113,10 @@ class CartController extends AbstractController
                 }
                 break;
             case 'accommodation':
-
-                $logger->info("Attempting to remove accommodation with ID: {$id}");
-
                 $accommodation = $accommodationRepository->find($id);
                 if ($accommodation) {
-
-                    $logger->info("Found accommodation: {$accommodation->getName()}");
                     $reservation->addAccommodation($accommodation);
-                    $logger->info("Removed accommodation from reservation");
-                    $logger->info("Flushed changes to the database");
-
                     $this->addFlash('notice', $accommodation->getName());
-                } else {
-                    $logger->error("Could not find accommodation with ID: {$id}");
                 }
                 break;
             case 'activity':
@@ -143,6 +126,7 @@ class CartController extends AbstractController
                 }
         }
         //dd($reservation);
+        $reservation->setUpdatedAt(new \DateTime("NOW"));
         $entityManager->persist($reservation);
         $entityManager->flush();
         return $this->redirectToRoute("app_explore");
@@ -158,7 +142,6 @@ class CartController extends AbstractController
         AccommodationRepository $accommodationRepository,
         ReservationService $reservationService,
         ActivityRepository $activityRepository,
-        LoggerInterface $logger
     ): Response {
         $id = $request->query->get('id');
         $type = $request->query->get('type');
@@ -186,8 +169,6 @@ class CartController extends AbstractController
                 $accommodation = $accommodationRepository->find($id);
                 if ($accommodation) {
                     $reservation->removeAccommodation($accommodation);
-                } else {
-                    $logger->error("Could not find accommodation with ID: {$id}");
                 }
                 break;
             case 'activity':
@@ -196,6 +177,7 @@ class CartController extends AbstractController
                     $reservation->removeActivity($activity);
                 }
         }
+        $reservation->setUpdatedAt(new \DateTime("NOW"));
         //dd($reservation);
         $em->persist($reservation);
         $em->flush();
@@ -209,7 +191,6 @@ class CartController extends AbstractController
         EntityManagerInterface $em,
         UserRepository $userRepository,
         ReservationService $reservationService,
-        LoggerInterface $logger
     ): Response {
         $user = $this->getUser();
         if ($user === null) {
@@ -217,19 +198,18 @@ class CartController extends AbstractController
             return $this->redirectToRoute('app_login');
         }
         $userId = $user->getId();
-        $User2 = $userRepository->find($userId);
+        $realUser = $userRepository->find($userId);
         // Find the existing reservation by user ID, if any
         $reservation = null;
         if ($userId) {
-            $reservation = $reservationService->findReservationByUser($User2);
-        }
-        if($reservation->getStartDate()!== null){
+            $reservation = $reservationService->findReservationByUser($realUser);
         }
         //dd($request);
         $startDateValue = $request->request->get("start");
         $endDateValue = $request->request->get("end");
         $reservation->setStartDate(new \DateTime($startDateValue));
         $reservation->setEndDate(new \DateTime($endDateValue));
+        $reservation->setUpdatedAt(new \DateTime("NOW"));
         //dd($reservation);
         $em->persist($reservation);
         $em->flush();

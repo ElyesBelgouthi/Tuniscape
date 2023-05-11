@@ -160,11 +160,21 @@ h3 {
     transition: 0.6s;
 }
 
+
+.banner--title {
+    color: var(--clr-light);
+    text-align: center;
+}
+.banner--title > p {
+    font-size: 40px;
+}
+
 .banner {
     display: flex;
     flex-direction: column;
     justify-content: center;
     padding-top: 190px;
+    align-items: center;
     width: 100%;
     align-items: center;
     height: 60%;
