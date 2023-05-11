@@ -21,17 +21,16 @@
 {% include "navbar.html.twig" %}
 <section id="banner" class="banner" style="background-image: url('{{ asset(folderName ~ image) }}')">
     <h1 class="banner--title">{{ name }}</h1>
+    {% if region %}
+        <p>{{ region }}</p>
+    {% endif %}
     <a href="#description" class="explore--btn learn--more">Learn More</a>
 </section>
 
 <section id="description" class="description--container">
     <p>{{ description }}</p>
 </section>
-{% if region %}
-    <section id="region" class="region--container">
-        Region: {{ region }}
-    </section>
-{% endif %}
+
 <a href="{{ path('cart_add',{'id':id,'type':type }) }}"><button class="explore--btn">Add To Cart</button></a>
 
 <script type="text/javascript" src="{{ asset('assets/js/details.js') }}"></script>
