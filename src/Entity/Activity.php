@@ -29,7 +29,7 @@ class Activity
     private ?float $longitude = null;
 
     #[ORM\ManyToOne(inversedBy: 'activities')]
-    private ?Region $Region = null;
+    private ?Region $region = null;
 
     #[ORM\ManyToMany(targetEntity: Reservation::class, inversedBy: "activity")]
     private Collection $reservations;

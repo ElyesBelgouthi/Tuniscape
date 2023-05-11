@@ -28,10 +28,12 @@
             <div class="login-box">
                 {{ form_start(registrationForm, {'attr': {'id': 'registration-form'}}) }}                    <div class="user-box full-box">
                     {{ form_widget(registrationForm.email, {'required': true}) }}
+                    {{ form_errors(registrationForm.email) }}
                     <label>Email</label>
                 </div>
                 <div class="user-box full-box">
                     {{ form_widget(registrationForm.username, {'required': true}) }}
+                    {{ form_errors(registrationForm.username) }}
                     <label>Username</label>
                 </div>
                 <div class="flex-box">
@@ -60,9 +62,10 @@
                 </div>
                 <div class="user-box full-box last-box">
                     {{ form_widget(registrationForm.plainPassword, {'required': true}) }}
-
+                    {{ form_errors(registrationForm.plainPassword) }}
                     <label>Password</label>
                 </div>
+
                 <p class="text-register">
                     {{ form_widget(registrationForm.agreeTerms, {'required': true}) }} Agree Terms
                 </p>
