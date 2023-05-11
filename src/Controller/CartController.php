@@ -126,6 +126,7 @@ class CartController extends AbstractController
                 }
         }
         //dd($reservation);
+        $reservation->setUpdatedAt(new \DateTime("NOW"));
         $entityManager->persist($reservation);
         $entityManager->flush();
         return $this->redirectToRoute("app_explore");
@@ -176,6 +177,7 @@ class CartController extends AbstractController
                     $reservation->removeActivity($activity);
                 }
         }
+        $reservation->setUpdatedAt(new \DateTime("NOW"));
         //dd($reservation);
         $em->persist($reservation);
         $em->flush();
@@ -207,6 +209,7 @@ class CartController extends AbstractController
         $endDateValue = $request->request->get("end");
         $reservation->setStartDate(new \DateTime($startDateValue));
         $reservation->setEndDate(new \DateTime($endDateValue));
+        $reservation->setUpdatedAt(new \DateTime("NOW"));
         //dd($reservation);
         $em->persist($reservation);
         $em->flush();
